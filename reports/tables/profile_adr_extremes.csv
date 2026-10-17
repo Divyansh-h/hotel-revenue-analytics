@@ -1,0 +1,11 @@
+rank_type,rank,raw_row_index,hotel,market_segment,customer_type,adr
+Lowest,1,14969,Resort Hotel,Groups,Transient-Party,-6.38
+Lowest,2,0,Resort Hotel,Direct,Transient,0.0
+Lowest,3,1,Resort Hotel,Direct,Transient,0.0
+Lowest,4,125,Resort Hotel,Complementary,Transient,0.0
+Lowest,5,167,Resort Hotel,Online TA,Transient,0.0
+Highest,1,48515,City Hotel,Offline TA/TO,Transient,5400.0
+Highest,2,111403,City Hotel,Offline TA/TO,Transient,510.0
+Highest,3,15083,Resort Hotel,Corporate,Transient,508.0
+Highest,4,103912,City Hotel,Direct,Transient-Party,451.5
+Highest,5,13142,Resort Hotel,Online TA,Transient,450.0

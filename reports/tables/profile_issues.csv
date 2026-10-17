@@ -1,0 +1,15 @@
+issue,columns,rows_affected,percent_of_data,details
+Negative ADR (adr < 0),adr,1,0.0008,Single row with adr = -6.38
+Extreme High ADR (adr > 1000),adr,1,0.0008,Single row with adr = 5400.0
+Zero ADR (adr = 0),"adr, market_segment",1959,1.6408,"Non-revenue stays (Complementary, promotions, house guests)"
+Zero Stay Nights (weekend + week nights = 0),"stays_in_weekend_nights, stays_in_week_nights",715,0.5989,Bookings with 0 duration (cancelled or day-use)
+Zero Total Guests (adults + children + babies = 0),"adults, children, babies",180,0.1508,Bookings registered with zero guest occupants
+Exact Duplicate Rows (all 32 raw columns),all 32 columns,31994,26.7979,Repeated rows without unique booking identifier
+Canceled Date Later Than Arrival Date,"reservation_status, reservation_status_date, arrival_date_*",0,0.0,Cancellations recorded with status date > arrival date
+Room Type Mismatch (assigned <> reserved),"reserved_room_type, assigned_room_type",14917,12.4943,Operational reassignments / room upgrades
+Missing Company ID,company,112593,94.3069,94.31% missing corporate identifier
+Missing Agent ID,agent,16340,13.6862,13.69% direct or non-agent bookings
+Missing Country of Origin,country,488,0.4087,488 bookings without customer country code
+Missing Children Count,children,4,0.0034,4 bookings with NaN children
+Undefined Market Segment,market_segment,2,0.0017,Categorical 'Undefined' value in market segment
+Undefined Distribution Channel,distribution_channel,5,0.0042,Categorical 'Undefined' value in distribution channel

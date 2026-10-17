@@ -1,0 +1,9 @@
+check_num,check_name,status,expected,actual
+1,Dataset Shape,PASS,"(119390, 32)","(119390, 32)"
+2,Exact Column Names & Order,PASS,"hotel, is_canceled, lead_time, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, stays_in_weekend_nights, stays_in_week_nights, adults, children, babies, meal, country, market_segment, distribution_channel, is_repeated_guest, previous_cancellations, previous_bookings_not_canceled, reserved_room_type, assigned_room_type, booking_changes, deposit_type, agent, company, days_in_waiting_list, customer_type, adr, required_car_parking_spaces, total_of_special_requests, reservation_status, reservation_status_date","hotel, is_canceled, lead_time, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, stays_in_weekend_nights, stays_in_week_nights, adults, children, babies, meal, country, market_segment, distribution_channel, is_repeated_guest, previous_cancellations, previous_bookings_not_canceled, reserved_room_type, assigned_room_type, booking_changes, deposit_type, agent, company, days_in_waiting_list, customer_type, adr, required_car_parking_spaces, total_of_special_requests, reservation_status, reservation_status_date"
+3,Hotel Categorical Values,PASS,"['City Hotel', 'Resort Hotel']","['City Hotel', 'Resort Hotel']"
+4,Reservation Status Frequencies,PASS,"{'Check-Out': 75166, 'Canceled': 43017, 'No-Show': 1207}","{'Check-Out': 75166, 'Canceled': 43017, 'No-Show': 1207}"
+5,is_canceled Consistency,PASS,is_canceled == 1 exactly for Canceled / No-Show (0 mismatches),0 mismatches
+6,Cancellation Rates,PASS,"Overall: 36.9-37.1%, City: 41.5-41.9%, Resort: 27.6-28.0%","Overall: 37.04%, City: 41.73%, Resort: 27.76%"
+7,Arrival Date Range,PASS,2015-07-01 to 2017-08-31,2015-07-01 to 2017-08-31
+8,Missing Value Counts,PASS,"children ~4, country ~488, agent ~16340, company ~112593","children: 4, country: 488, agent: 16340, company: 112593"

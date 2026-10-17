@@ -1,0 +1,16 @@
+window:
+  start: '2015-08-01'
+  end: '2017-08-31'
+  days: 762
+capacity_buffer: 1.1
+hotels:
+  City Hotel:
+    peak_rooms_sold: 226
+    peak_date: '2016-08-13'
+    capacity: 250
+    avg_rooms_sold_per_night: 175.67
+  Resort Hotel:
+    peak_rooms_sold: 187
+    peak_date: '2016-03-25'
+    capacity: 210
+    avg_rooms_sold_per_night: 150.13

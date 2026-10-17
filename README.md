@@ -64,6 +64,48 @@ python src/run_sql.py sql/02_phase1_checks.sql
 python src/check_phase1.py
 ```
 
+## How to reproduce Phase 2 (exact commands in order)
+Execute the following commands from the repository root:
+
+```bash
+# 1. Date Dimension Table (2015-01-01 to 2017-12-31)
+python src/run_sql.py sql/10_dim_date.sql
+
+# 2. Stay-Nights Expansion Table (K1)
+python src/run_sql.py sql/20_stay_nights.sql
+
+# 3. Capacity Derivation, Reliable Window (W1, W2), and Daily Performance Mart
+python src/run_sql.py sql/21_capacity_daily.sql
+python src/write_assumptions.py
+
+# 4. Monthly, Yearly, and Overall Stay-Night KPI Views (K1-K4)
+python src/run_sql.py sql/30_monthly_kpis.sql
+
+# 5. Booking Trends & Pace View Across 26 Arrival Months (K5, K6)
+python src/run_sql.py sql/31_booking_trends.sql
+
+# 6. Cancellation Drivers Analysis Across 12 Dimensions
+python src/run_sql.py sql/40_cancellation_drivers.sql
+
+# 7. Cancellation Timing, Deposit Interaction, and Late Cancellation Risk
+python src/run_sql.py sql/41_cancel_timing.sql
+
+# 8. Market Segment & Distribution Channel Performance Views (K7)
+python src/run_sql.py sql/50_segment_channel.sql
+
+# 9. Seasonality Tiers, Overbooking Buffers, and Room Mismatch Views
+python src/run_sql.py sql/60_seasonality_overbooking.sql
+
+# 10. Executive Summary Query
+python src/run_sql.py sql/99_phase2_summary.sql
+
+# 11. Export All 17 Analytical Objects to CSV (data/outputs/*.csv)
+python src/export_sql_outputs.py
+
+# 12. Run Independent Pandas vs SQL Cross-Check
+python src/crosscheck_sql_vs_pandas.py
+```
+
 ## Known data issues
 Copied from `docs/data_quality_log.md`:
 

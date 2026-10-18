@@ -1,0 +1,115 @@
+pivot_table,row_label,col_label,metric,expected_value
+Overall_Totals,City Hotel,All,Bookings,"79,329"
+Overall_Totals,City Hotel,All,Cancel_Rate,41.73%
+Overall_Totals,City Hotel,All,Revenue_Realised,"$14,394,410.18"
+Overall_Totals,Resort Hotel,All,Bookings,"40,059"
+Overall_Totals,Resort Hotel,All,Cancel_Rate,27.76%
+Overall_Totals,Resort Hotel,All,Revenue_Realised,"$11,601,914.03"
+Overall_Totals,Total Portfolio,All,Bookings,"119,388"
+Overall_Totals,Total Portfolio,All,Cancel_Rate,37.04%
+Overall_Totals,Total Portfolio,All,Revenue_Realised,"$25,996,324.21"
+PT_Monthly,2015-07,City Hotel,Bookings,"1,398"
+PT_Monthly,2015-07,City Hotel,Cancel_Rate,67.17%
+PT_Monthly,2015-07,City Hotel,Revenue_Realised,"$79,645.69"
+PT_Monthly,2015-07,Resort Hotel,Bookings,"1,378"
+PT_Monthly,2015-07,Resort Hotel,Cancel_Rate,23.22%
+PT_Monthly,2015-07,Resort Hotel,Revenue_Realised,"$678,694.10"
+PT_Monthly,2015-07,Total,Bookings,"2,776"
+PT_Monthly,2015-07,Total,Cancel_Rate,45.35%
+PT_Monthly,2015-07,Total,Revenue_Realised,"$758,339.79"
+PT_Monthly,2015-08,City Hotel,Bookings,"2,480"
+PT_Monthly,2015-08,City Hotel,Cancel_Rate,49.68%
+PT_Monthly,2015-08,City Hotel,Revenue_Realised,"$285,197.49"
+PT_Monthly,2015-08,Resort Hotel,Bookings,"1,409"
+PT_Monthly,2015-08,Resort Hotel,Cancel_Rate,25.98%
+PT_Monthly,2015-08,Resort Hotel,Revenue_Realised,"$852,455.22"
+PT_Monthly,2015-08,Total,Bookings,"3,889"
+PT_Monthly,2015-08,Total,Cancel_Rate,41.09%
+PT_Monthly,2015-08,Total,Revenue_Realised,"$1,137,652.71"
+PT_Monthly,2015-09,City Hotel,Bookings,"3,529"
+PT_Monthly,2015-09,City Hotel,Cancel_Rate,43.72%
+PT_Monthly,2015-09,City Hotel,Revenue_Realised,"$588,544.97"
+PT_Monthly,2015-09,Resort Hotel,Bookings,"1,585"
+PT_Monthly,2015-09,Resort Hotel,Cancel_Rate,34.76%
+PT_Monthly,2015-09,Resort Hotel,Revenue_Realised,"$466,075.70"
+PT_Monthly,2015-09,Total,Bookings,"5,114"
+PT_Monthly,2015-09,Total,Cancel_Rate,40.95%
+PT_Monthly,2015-09,Total,Revenue_Realised,"$1,054,620.67"
+PT_Segment,Online TA,City Hotel,Bookings,"38,748"
+PT_Segment,Online TA,City Hotel,Cancel_Rate,37.40%
+PT_Segment,Online TA,City Hotel,Revenue_Realised,"$8,762,543.52"
+PT_Segment,Online TA,City Hotel,Revenue_Share_Pct,60.87%
+PT_Segment,Online TA,Resort Hotel,Bookings,"17,729"
+PT_Segment,Online TA,Resort Hotel,Cancel_Rate,35.24%
+PT_Segment,Online TA,Resort Hotel,Revenue_Realised,"$4,951,857.90"
+PT_Segment,Online TA,Resort Hotel,Revenue_Share_Pct,42.68%
+PT_Segment,Online TA,Total,Bookings,"56,477"
+PT_Segment,Online TA,Total,Cancel_Rate,36.72%
+PT_Segment,Online TA,Total,Revenue_Realised,"$13,714,401.42"
+PT_Segment,Online TA,Total,Revenue_Share_Pct,52.76%
+PT_Segment,Offline TA/TO,City Hotel,Bookings,"16,746"
+PT_Segment,Offline TA/TO,City Hotel,Cancel_Rate,42.83%
+PT_Segment,Offline TA/TO,City Hotel,Revenue_Realised,"$2,554,041.33"
+PT_Segment,Offline TA/TO,City Hotel,Revenue_Share_Pct,17.74%
+PT_Segment,Offline TA/TO,Resort Hotel,Bookings,"7,472"
+PT_Segment,Offline TA/TO,Resort Hotel,Cancel_Rate,15.23%
+PT_Segment,Offline TA/TO,Resort Hotel,Revenue_Realised,"$3,105,513.25"
+PT_Segment,Offline TA/TO,Resort Hotel,Revenue_Share_Pct,26.77%
+PT_Segment,Offline TA/TO,Total,Bookings,"24,218"
+PT_Segment,Offline TA/TO,Total,Cancel_Rate,34.31%
+PT_Segment,Offline TA/TO,Total,Revenue_Realised,"$5,659,554.58"
+PT_Segment,Offline TA/TO,Total,Revenue_Share_Pct,21.77%
+PT_Segment,Groups,City Hotel,Bookings,"13,975"
+PT_Segment,Groups,City Hotel,Cancel_Rate,68.86%
+PT_Segment,Groups,City Hotel,Revenue_Realised,"$980,788.50"
+PT_Segment,Groups,City Hotel,Revenue_Share_Pct,6.81%
+PT_Segment,Groups,Resort Hotel,Bookings,"5,835"
+PT_Segment,Groups,Resort Hotel,Cancel_Rate,42.40%
+PT_Segment,Groups,Resort Hotel,Revenue_Realised,"$888,368.06"
+PT_Segment,Groups,Resort Hotel,Revenue_Share_Pct,7.66%
+PT_Segment,Groups,Total,Bookings,"19,810"
+PT_Segment,Groups,Total,Cancel_Rate,61.07%
+PT_Segment,Groups,Total,Revenue_Realised,"$1,869,156.56"
+PT_Segment,Groups,Total,Revenue_Share_Pct,7.19%
+PT_LeadTime,0-7,City Hotel,Bookings,"10,808"
+PT_LeadTime,0-7,City Hotel,Cancel_Rate,12.20%
+PT_LeadTime,0-7,Resort Hotel,Bookings,"8,938"
+PT_LeadTime,0-7,Resort Hotel,Cancel_Rate,6.52%
+PT_LeadTime,0-7,Total,Bookings,"19,746"
+PT_LeadTime,0-7,Total,Cancel_Rate,9.63%
+PT_LeadTime,8-30,City Hotel,Bookings,"12,554"
+PT_LeadTime,8-30,City Hotel,Cancel_Rate,30.91%
+PT_LeadTime,8-30,Resort Hotel,Bookings,"6,406"
+PT_LeadTime,8-30,Resort Hotel,Cancel_Rate,21.90%
+PT_LeadTime,8-30,Total,Bookings,"18,960"
+PT_LeadTime,8-30,Total,Cancel_Rate,27.86%
+PT_LeadTime,31-90,City Hotel,Bookings,"20,796"
+PT_LeadTime,31-90,City Hotel,Cancel_Rate,39.91%
+PT_LeadTime,31-90,Resort Hotel,Bookings,"8,756"
+PT_LeadTime,31-90,Resort Hotel,Cancel_Rate,32.45%
+PT_LeadTime,31-90,Total,Bookings,"29,552"
+PT_LeadTime,31-90,Total,Cancel_Rate,37.70%
+PT_Channel,TA/TO,No Deposit,Bookings,"84,159"
+PT_Channel,TA/TO,No Deposit,Cancel_Rate,31.52%
+PT_Channel,TA/TO,Non Refund,Bookings,"13,650"
+PT_Channel,TA/TO,Non Refund,Cancel_Rate,99.61%
+PT_Channel,TA/TO,Refundable,Bookings,60
+PT_Channel,TA/TO,Refundable,Cancel_Rate,41.67%
+PT_Channel,TA/TO,Total,Bookings,"97,869"
+PT_Channel,TA/TO,Total,Cancel_Rate,41.03%
+PT_Channel,Direct,No Deposit,Bookings,"14,148"
+PT_Channel,Direct,No Deposit,Cancel_Rate,15.26%
+PT_Channel,Direct,Non Refund,Bookings,398
+PT_Channel,Direct,Non Refund,Cancel_Rate,97.49%
+PT_Channel,Direct,Refundable,Bookings,98
+PT_Channel,Direct,Refundable,Cancel_Rate,10.20%
+PT_Channel,Direct,Total,Bookings,"14,644"
+PT_Channel,Direct,Total,Cancel_Rate,17.46%
+PT_Channel,Corporate,No Deposit,Bookings,"6,135"
+PT_Channel,Corporate,No Deposit,Cancel_Rate,15.73%
+PT_Channel,Corporate,Non Refund,Bookings,538
+PT_Channel,Corporate,Non Refund,Cancel_Rate,94.42%
+PT_Channel,Corporate,Refundable,Bookings,4
+PT_Channel,Corporate,Refundable,Cancel_Rate,25.00%
+PT_Channel,Corporate,Total,Bookings,"6,677"
+PT_Channel,Corporate,Total,Cancel_Rate,22.08%

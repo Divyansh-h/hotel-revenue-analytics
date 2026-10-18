@@ -1,0 +1,28 @@
+check_name,hotel,expected_value,tolerance
+bookings,City Hotel,79329,0
+bookings,Resort Hotel,40059,0
+bookings,Total,119388,0
+cancellations,City Hotel,33101,0
+cancellations,Resort Hotel,11122,0
+cancellations,Total,44223,0
+cancel_rate,City Hotel,0.4173,0.0001
+cancel_rate,Resort Hotel,0.2776,0.0001
+cancel_rate,Total,0.3704,0.0001
+sum_room_revenue_realised,City Hotel,14394410.18,0.01
+sum_room_revenue_realised,Resort Hotel,11601914.03,0.01
+sum_room_revenue_realised,Total,25996324.21,0.01
+sum_total_nights_realised,City Hotel,135153,0
+sum_total_nights_realised,Resort Hotel,119877,0
+sum_total_nights_realised,Total,255030,0
+room_nights_sold,City Hotel,133860,0
+room_nights_sold,Resort Hotel,114401,0
+room_nights_sold,Total,248261,0
+room_revenue,City Hotel,14285466.42,0.01
+room_revenue,Resort Hotel,10901719.74,0.01
+room_revenue,Total,25187186.16,0.01
+occupancy,City Hotel,0.7027,0.0001
+occupancy,Resort Hotel,0.7149,0.0001
+occupancy,Total,0.7083,0.0001
+revpar,City Hotel,74.99,0.05
+revpar,Resort Hotel,68.13,0.05
+revpar,Total,71.86,0.05

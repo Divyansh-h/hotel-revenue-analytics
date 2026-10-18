@@ -48,20 +48,51 @@ combined AS (
     FROM booking_agg b
     LEFT JOIN stay_agg s ON b.hotel = s.hotel AND b.market_segment = s.market_segment
     GROUP BY GROUPING SETS ((b.hotel, b.market_segment), (b.market_segment))
+),
+base_metrics AS (
+    SELECT
+        hotel,
+        market_segment,
+        bookings,
+        cancellations,
+        ROUND(100.0 * cancellations::numeric / NULLIF(bookings, 0), 1) AS cancel_rate_pct,
+        room_nights_sold,
+        room_revenue,
+        ROUND(room_revenue / NULLIF(room_nights_sold, 0), 2) AS adr,
+        ROUND(100.0 * room_nights_sold::numeric / NULLIF(SUM(room_nights_sold) OVER (PARTITION BY hotel), 0), 1) AS room_night_share_pct,
+        ROUND(100.0 * room_revenue / NULLIF(SUM(room_revenue) OVER (PARTITION BY hotel), 0), 1) AS revenue_share_pct,
+        DENSE_RANK() OVER (PARTITION BY hotel ORDER BY room_revenue DESC)::integer AS revenue_rank,
+        CASE WHEN COALESCE(room_revenue, 0) = 0 THEN 1 ELSE 0 END::smallint AS is_zero_revenue_segment
+    FROM combined
+),
+hotel_benchmarks AS (
+    SELECT
+        hotel,
+        ROUND(100.0 * SUM(cancellations)::numeric / NULLIF(SUM(bookings), 0), 1) AS hotel_cancel_rate_pct,
+        ROUND(SUM(room_revenue) / NULLIF(SUM(room_nights_sold), 0), 2) AS hotel_adr
+    FROM combined
+    GROUP BY hotel
 )
 SELECT
-    hotel,
-    market_segment,
-    bookings,
-    cancellations,
-    ROUND(100.0 * cancellations::numeric / NULLIF(bookings, 0), 1) AS cancel_rate_pct,
-    room_nights_sold,
-    room_revenue,
-    ROUND(room_revenue / NULLIF(room_nights_sold, 0), 2) AS adr,
-    ROUND(100.0 * room_nights_sold::numeric / NULLIF(SUM(room_nights_sold) OVER (PARTITION BY hotel), 0), 1) AS room_night_share_pct,
-    ROUND(100.0 * room_revenue / NULLIF(SUM(room_revenue) OVER (PARTITION BY hotel), 0), 1) AS revenue_share_pct
-FROM combined
-ORDER BY (hotel = 'All') DESC, hotel, room_revenue DESC;
+    b.hotel,
+    b.market_segment,
+    b.bookings,
+    b.cancellations,
+    b.cancel_rate_pct,
+    b.room_nights_sold,
+    b.room_revenue,
+    b.adr,
+    b.room_night_share_pct,
+    b.revenue_share_pct,
+    b.revenue_rank,
+    b.is_zero_revenue_segment,
+    CASE
+        WHEN b.cancel_rate_pct > h.hotel_cancel_rate_pct AND b.adr < h.hotel_adr THEN 1
+        ELSE 0
+    END::smallint AS is_underperformer
+FROM base_metrics b
+JOIN hotel_benchmarks h ON b.hotel = h.hotel
+ORDER BY (b.hotel = 'All') DESC, b.hotel, b.revenue_rank;
 
 -- 2. View: hotel.v_channel_performance
 CREATE OR REPLACE VIEW hotel.v_channel_performance AS

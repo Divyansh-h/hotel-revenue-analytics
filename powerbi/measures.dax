@@ -1,0 +1,254 @@
+// ==============================================================================
+// HOTEL REVENUE ANALYTICS: POWER BI DAX MEASURES SPECIFICATION
+// Source Tables: dim_date, dim_hotel, dim_profile, fact_bookings, fact_stay_nights, fact_capacity
+// Target Table: Measures
+// ==============================================================================
+
+// ------------------------------------------------------------------------------
+// DISPLAY FOLDER: Bookings (fact_bookings, filtered by arrival date)
+// ------------------------------------------------------------------------------
+
+// Purpose: Total count of reservation transactions attributed to arrival date cohort
+// Display Folder: Bookings
+// Format String: #,##0
+Bookings = 
+COUNTROWS(fact_bookings)
+
+
+// Purpose: Total count of reservations marked as canceled or no-show
+// Display Folder: Bookings
+// Format String: #,##0
+Cancelled Bookings = 
+CALCULATE(
+    [Bookings],
+    fact_bookings[is_canceled] = 1
+)
+
+
+// Purpose: Count of reservations strictly having reservation_status = 'Canceled' (excluding No-Show)
+// Display Folder: Bookings
+// Format String: #,##0
+Cancellations (Canceled status) = 
+CALCULATE(
+    [Bookings],
+    fact_bookings[reservation_status] = "Canceled"
+)
+
+
+// Purpose: Count of reservations strictly having is_no_show = 1
+// Display Folder: Bookings
+// Format String: #,##0
+No-Shows = 
+CALCULATE(
+    [Bookings],
+    fact_bookings[is_no_show] = 1
+)
+
+
+// Purpose: Share of bookings canceled or no-show attributed to arrival cohort
+// Display Folder: Bookings
+// Format String: 0.0%
+Cancel Rate % = 
+DIVIDE([Cancelled Bookings], [Bookings])
+
+
+// Purpose: Share of bookings resulting in guest no-show
+// Display Folder: Bookings
+// Format String: 0.0%
+No-Show Rate % = 
+DIVIDE([No-Shows], [Bookings])
+
+
+// Purpose: Realized stay conversion proxy equal to 1 minus Cancel Rate % (Rule K6)
+// Display Folder: Bookings
+// Format String: 0.0%
+Stay Conversion % = 
+DIVIDE(
+    CALCULATE([Bookings], fact_bookings[is_canceled] = 0),
+    [Bookings]
+)
+
+
+// Purpose: Average advance booking window in days from booking date to arrival date
+// Display Folder: Bookings
+// Format String: 0.0
+Avg Lead Time = 
+AVERAGE(fact_bookings[lead_time])
+
+
+// Purpose: Average advance cancellation window in days before arrival (Rule D11)
+// Display Folder: Bookings
+// Format String: 0.0
+Avg Days Cancelled Before Arrival = 
+AVERAGE(fact_bookings[days_cancelled_before_arrival])
+
+
+// Purpose: Share of non-cancelled bookings where assigned room type differs from reserved room type (Rule D10)
+// Display Folder: Bookings
+// Format String: 0.0%
+Room Type Mismatch % = 
+DIVIDE(
+    CALCULATE([Bookings], fact_bookings[is_canceled] = 0, fact_bookings[room_type_mismatch] = 1),
+    CALCULATE([Bookings], fact_bookings[is_canceled] = 0)
+)
+
+
+// ------------------------------------------------------------------------------
+// DISPLAY FOLDER: Stay-night KPIs (fact_stay_nights and fact_capacity, filtered by stay date)
+// ------------------------------------------------------------------------------
+
+// Purpose: Total realized room-nights sold within reliable window (Rule K1)
+// Display Folder: Stay-night KPIs
+// Format String: #,##0
+Room Nights Sold = 
+COUNTROWS(fact_stay_nights)
+
+
+// Purpose: Total realized room revenue from stayed room-nights (Rule K2)
+// Display Folder: Stay-night KPIs
+// Format String: #,##0.00
+Room Revenue = 
+SUM(fact_stay_nights[adr])
+
+
+// Purpose: Total available room-nights based on property capacity within reliable window (Rule W2)
+// Display Folder: Stay-night KPIs
+// Format String: #,##0
+Room Nights Available = 
+SUM(fact_capacity[rooms_available])
+
+
+// Purpose: Average Daily Rate per room-night sold (Rule K3)
+// Display Folder: Stay-night KPIs
+// Format String: #,##0.00
+ADR = 
+DIVIDE([Room Revenue], [Room Nights Sold])
+
+
+// Purpose: Daily and monthly room occupancy rate (nights sold / nights available) (Rule K4)
+// Display Folder: Stay-night KPIs
+// Format String: 0.0%
+Occupancy % = 
+DIVIDE([Room Nights Sold], [Room Nights Available])
+
+
+// Purpose: Revenue Per Available Room; mathematically equals ADR * Occupancy % (Rule K4)
+// Display Folder: Stay-night KPIs
+// Format String: #,##0.00
+RevPAR = 
+DIVIDE([Room Revenue], [Room Nights Available])
+
+
+// ------------------------------------------------------------------------------
+// DISPLAY FOLDER: Shares and trends
+// ------------------------------------------------------------------------------
+
+// Purpose: Share of room revenue within the current hotel/date context across market segments or channels
+// Display Folder: Shares and trends
+// Format String: 0.0%
+Revenue Share % = 
+DIVIDE(
+    [Room Revenue],
+    CALCULATE([Room Revenue], ALLSELECTED(dim_profile))
+)
+
+
+// Purpose: Share of room-nights sold within the current hotel/date context across market segments or channels
+// Display Folder: Shares and trends
+// Format String: 0.0%
+Room Night Share % = 
+DIVIDE(
+    [Room Nights Sold],
+    CALCULATE([Room Nights Sold], ALLSELECTED(dim_profile))
+)
+
+
+// Purpose: Realized room revenue in the preceding calendar month
+// Display Folder: Shares and trends
+// Format String: #,##0.00
+Revenue Prior Month = 
+CALCULATE(
+    [Room Revenue],
+    DATEADD(dim_date[date_key], -1, MONTH)
+)
+
+
+// Purpose: Month-over-month percentage growth in room revenue
+// Display Folder: Shares and trends
+// Format String: 0.0%
+Revenue MoM % = 
+DIVIDE(
+    [Room Revenue] - [Revenue Prior Month],
+    [Revenue Prior Month]
+)
+
+
+// Purpose: RevPAR for the same period in the prior calendar year
+// Display Folder: Shares and trends
+// Format String: #,##0.00
+RevPAR Prior Year = 
+CALCULATE(
+    [RevPAR],
+    SAMEPERIODLASTYEAR(dim_date[date_key])
+)
+
+
+// Purpose: Year-over-year percentage growth in RevPAR
+// Display Folder: Shares and trends
+// Format String: 0.0%
+RevPAR YoY % = 
+DIVIDE(
+    [RevPAR] - [RevPAR Prior Year],
+    [RevPAR Prior Year]
+)
+
+
+// Purpose: 1 when Cancel Rate % is above portfolio/hotel benchmark AND ADR is below benchmark AND ADR >= 5; else 0
+// Display Folder: Shares and trends
+// Format String: 0
+Underperformer Flag = 
+VAR CurrentCancelRate = [Cancel Rate %]
+VAR BenchmarkCancelRate = CALCULATE([Cancel Rate %], ALLSELECTED(dim_profile))
+VAR CurrentADR = [ADR]
+VAR BenchmarkADR = CALCULATE([ADR], ALLSELECTED(dim_profile))
+RETURN
+    IF(
+        NOT ISBLANK(CurrentCancelRate)
+            && NOT ISBLANK(CurrentADR)
+            && CurrentCancelRate > BenchmarkCancelRate
+            && CurrentADR < BenchmarkADR
+            && CurrentADR >= 5,
+        1,
+        0
+    )
+
+
+// ------------------------------------------------------------------------------
+// DISPLAY FOLDER: Assumptions
+// ------------------------------------------------------------------------------
+
+// Purpose: Dynamic portfolio capacity string (no numbers typed by hand) (Rule W2)
+// Display Folder: Assumptions
+// Format String: Text
+Capacity Text = 
+CONCATENATEX(
+    dim_hotel,
+    dim_hotel[hotel] & ": " & FORMAT(dim_hotel[rooms_capacity], "#,##0") & " rooms",
+    " | ",
+    dim_hotel[hotel],
+    ASC
+)
+
+
+// Purpose: First calendar date of the reliable performance window (Rule W1)
+// Display Folder: Assumptions
+// Format String: yyyy-mm-dd
+Window Start = 
+MIN(fact_capacity[date_key])
+
+
+// Purpose: Last calendar date of the reliable performance window (Rule W1)
+// Display Folder: Assumptions
+// Format String: yyyy-mm-dd
+Window End = 
+MAX(fact_capacity[date_key])

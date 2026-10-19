@@ -106,6 +106,41 @@ python src/export_sql_outputs.py
 python src/crosscheck_sql_vs_pandas.py
 ```
 
+## How to reproduce Phase 4 (exact commands in order)
+Execute the following commands from the repository root:
+
+```bash
+# 1. Build Star Schema Tables in PostgreSQL (hotel.dim_*, hotel.fact_*)
+python src/run_sql.py sql/70_powerbi_model.sql
+
+# 2. Export Star Schema CSVs to powerbi/data/
+python src/export_powerbi_model.py
+
+# 3. Validate Star Schema CSV Integrity and Reconciliation (16 checks)
+python src/validate_powerbi_model.py
+
+# 4. Generate Pure Power Query M Ingestion Scripts & Validate
+python src/make_pbi_m_scripts.py
+python powerbi/power_query/test_m_scripts.py
+
+# 5. Verify DAX Measures Syntax, Column References & Dependencies
+python src/check_dax_refs.py
+
+# 6. Validate Custom Report Theme & WCAG Accessibility Contrast
+python src/validate_powerbi_theme.py
+
+# 7. Generate Dashboard Narrative and Key Findings Text from Data Marts
+python src/make_dashboard_text.py
+
+# 8. Compute Multi-Scenario Expected Validation Benchmarks (S1-S6)
+python src/make_pbi_validation.py
+
+# 9. Power BI Desktop Assembly & Validation (Manual Steps for Report Author)
+# Follow powerbi/BUILD_GUIDE.md to import queries, create relationships, add DAX measures, apply theme, and assemble visual canvas.
+# Verify report cards against benchmarks using powerbi/VALIDATION_CHECKLIST.md.
+# Save page screenshots to powerbi/screenshots/ and save report as powerbi/hotel_revenue_analytics.pbix.
+```
+
 ## Known data issues
 Copied from `docs/data_quality_log.md`:
 

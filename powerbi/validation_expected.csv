@@ -1,0 +1,139 @@
+scenario_id,slicers,measure,expected_value,tolerance
+S1,No filters,Bookings,119388,0
+S1,No filters,Cancelled Bookings,44223,0
+S1,No filters,Cancellations (Canceled status),43016,0
+S1,No filters,No-Shows,1207,0
+S1,No filters,Cancel Rate %,37.0,0.1
+S1,No filters,No-Show Rate %,1.0,0.1
+S1,No filters,Stay Conversion %,63.0,0.1
+S1,No filters,Avg Lead Time,104.0,0.1
+S1,No filters,Avg Days Cancelled Before Arrival,88.3,0.1
+S1,No filters,Room Type Mismatch %,18.8,0.1
+S1,No filters,Room Nights Sold,248261,0
+S1,No filters,Room Revenue,25187186.16,0.01
+S1,No filters,Room Nights Available,350520,0
+S1,No filters,ADR,101.45,0.01
+S1,No filters,Occupancy %,70.8,0.1
+S1,No filters,RevPAR,71.86,0.01
+S1,No filters,Revenue Share %,100.0,0.1
+S1,No filters,Room Night Share %,100.0,0.1
+S1,No filters,Revenue Prior Month,25187186.16,0.01
+S1,No filters,Revenue MoM %,0.0,0.1
+S1,No filters,RevPAR Prior Year,64.63,0.01
+S1,No filters,RevPAR YoY %,11.2,0.1
+S1,No filters,Underperformer Flag,0,0
+S2,Hotel = City Hotel,Bookings,79329,0
+S2,Hotel = City Hotel,Cancelled Bookings,33101,0
+S2,Hotel = City Hotel,Cancellations (Canceled status),32185,0
+S2,Hotel = City Hotel,No-Shows,916,0
+S2,Hotel = City Hotel,Cancel Rate %,41.7,0.1
+S2,Hotel = City Hotel,No-Show Rate %,1.2,0.1
+S2,Hotel = City Hotel,Stay Conversion %,58.3,0.1
+S2,Hotel = City Hotel,Avg Lead Time,109.7,0.1
+S2,Hotel = City Hotel,Avg Days Cancelled Before Arrival,91.8,0.1
+S2,Hotel = City Hotel,Room Type Mismatch %,14.7,0.1
+S2,Hotel = City Hotel,Room Nights Sold,133860,0
+S2,Hotel = City Hotel,Room Revenue,14285466.42,0.01
+S2,Hotel = City Hotel,Room Nights Available,190500,0
+S2,Hotel = City Hotel,ADR,106.72,0.01
+S2,Hotel = City Hotel,Occupancy %,70.3,0.1
+S2,Hotel = City Hotel,RevPAR,74.99,0.01
+S2,Hotel = City Hotel,Revenue Share %,100.0,0.1
+S2,Hotel = City Hotel,Room Night Share %,100.0,0.1
+S2,Hotel = City Hotel,Revenue Prior Month,14285466.42,0.01
+S2,Hotel = City Hotel,Revenue MoM %,0.0,0.1
+S2,Hotel = City Hotel,RevPAR Prior Year,66.67,0.01
+S2,Hotel = City Hotel,RevPAR YoY %,12.5,0.1
+S2,Hotel = City Hotel,Underperformer Flag,0,0
+S3,"Hotel = Resort Hotel, Year = 2016",Bookings,18567,0
+S3,"Hotel = Resort Hotel, Year = 2016",Cancelled Bookings,4930,0
+S3,"Hotel = Resort Hotel, Year = 2016",Cancellations (Canceled status),4817,0
+S3,"Hotel = Resort Hotel, Year = 2016",No-Shows,113,0
+S3,"Hotel = Resort Hotel, Year = 2016",Cancel Rate %,26.6,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",No-Show Rate %,0.6,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Stay Conversion %,73.4,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Avg Lead Time,92.1,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Avg Days Cancelled Before Arrival,72.0,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Room Type Mismatch %,27.1,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Room Nights Sold,54037,0
+S3,"Hotel = Resort Hotel, Year = 2016",Room Revenue,4822927.67,0.01
+S3,"Hotel = Resort Hotel, Year = 2016",Room Nights Available,76860,0
+S3,"Hotel = Resort Hotel, Year = 2016",ADR,89.25,0.01
+S3,"Hotel = Resort Hotel, Year = 2016",Occupancy %,70.3,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",RevPAR,62.75,0.01
+S3,"Hotel = Resort Hotel, Year = 2016",Revenue Share %,100.0,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Room Night Share %,100.0,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Revenue Prior Month,4765499.03,0.01
+S3,"Hotel = Resort Hotel, Year = 2016",Revenue MoM %,1.2,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",RevPAR Prior Year,60.92,0.01
+S3,"Hotel = Resort Hotel, Year = 2016",RevPAR YoY %,3.0,0.1
+S3,"Hotel = Resort Hotel, Year = 2016",Underperformer Flag,0,0
+S4,Market Segment = Online TA,Bookings,56477,0
+S4,Market Segment = Online TA,Cancelled Bookings,20739,0
+S4,Market Segment = Online TA,Cancellations (Canceled status),20148,0
+S4,Market Segment = Online TA,No-Shows,591,0
+S4,Market Segment = Online TA,Cancel Rate %,36.7,0.1
+S4,Market Segment = Online TA,No-Show Rate %,1.0,0.1
+S4,Market Segment = Online TA,Stay Conversion %,63.3,0.1
+S4,Market Segment = Online TA,Avg Lead Time,83.0,0.1
+S4,Market Segment = Online TA,Avg Days Cancelled Before Arrival,70.6,0.1
+S4,Market Segment = Online TA,Room Type Mismatch %,14.7,0.1
+S4,Market Segment = Online TA,Room Nights Sold,116701,0
+S4,Market Segment = Online TA,Room Revenue,13395128.51,0.01
+S4,Market Segment = Online TA,Room Nights Available,350520,0
+S4,Market Segment = Online TA,ADR,114.78,0.01
+S4,Market Segment = Online TA,Occupancy %,33.3,0.1
+S4,Market Segment = Online TA,RevPAR,38.22,0.01
+S4,Market Segment = Online TA,Revenue Share %,53.2,0.1
+S4,Market Segment = Online TA,Room Night Share %,47.0,0.1
+S4,Market Segment = Online TA,Revenue Prior Month,13395128.51,0.01
+S4,Market Segment = Online TA,Revenue MoM %,0.0,0.1
+S4,Market Segment = Online TA,RevPAR Prior Year,32.40,0.01
+S4,Market Segment = Online TA,RevPAR YoY %,18.0,0.1
+S4,Market Segment = Online TA,Underperformer Flag,0,0
+S5,"Distribution Channel = Direct, Year = 2017",Bookings,5060,0
+S5,"Distribution Channel = Direct, Year = 2017",Cancelled Bookings,890,0
+S5,"Distribution Channel = Direct, Year = 2017",Cancellations (Canceled status),846,0
+S5,"Distribution Channel = Direct, Year = 2017",No-Shows,44,0
+S5,"Distribution Channel = Direct, Year = 2017",Cancel Rate %,17.6,0.1
+S5,"Distribution Channel = Direct, Year = 2017",No-Show Rate %,0.9,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Stay Conversion %,82.4,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Avg Lead Time,63.3,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Avg Days Cancelled Before Arrival,60.0,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Room Type Mismatch %,15.6,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Room Nights Sold,12818,0
+S5,"Distribution Channel = Direct, Year = 2017",Room Revenue,1665009.93,0.01
+S5,"Distribution Channel = Direct, Year = 2017",Room Nights Available,111780,0
+S5,"Distribution Channel = Direct, Year = 2017",ADR,129.90,0.01
+S5,"Distribution Channel = Direct, Year = 2017",Occupancy %,11.5,0.1
+S5,"Distribution Channel = Direct, Year = 2017",RevPAR,14.90,0.01
+S5,"Distribution Channel = Direct, Year = 2017",Revenue Share %,17.1,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Room Night Share %,14.8,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Revenue Prior Month,1771677.92,0.01
+S5,"Distribution Channel = Direct, Year = 2017",Revenue MoM %,-6.0,0.1
+S5,"Distribution Channel = Direct, Year = 2017",RevPAR Prior Year,10.70,0.01
+S5,"Distribution Channel = Direct, Year = 2017",RevPAR YoY %,39.2,0.1
+S5,"Distribution Channel = Direct, Year = 2017",Underperformer Flag,0,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Bookings,4687,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Cancelled Bookings,3499,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Cancellations (Canceled status),3494,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",No-Shows,5,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Cancel Rate %,74.7,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",No-Show Rate %,0.1,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Stay Conversion %,25.3,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Avg Lead Time,240.8,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Avg Days Cancelled Before Arrival,169.5,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Room Type Mismatch %,19.5,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Room Nights Sold,3007,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Room Revenue,251936.50,0.01
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Room Nights Available,91500,0
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",ADR,83.78,0.01
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Occupancy %,3.3,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",RevPAR,2.75,0.01
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Revenue Share %,3.7,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Room Night Share %,4.6,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Revenue Prior Month,267010.00,0.01
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Revenue MoM %,-5.6,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",RevPAR Prior Year,8.76,0.01
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",RevPAR YoY %,-68.6,0.1
+S6,"Hotel = City Hotel, Market Segment = Groups, Year = 2016",Underperformer Flag,1,0

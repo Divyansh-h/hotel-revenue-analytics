@@ -1,0 +1,1287 @@
+{
+  "metadata": {
+    "source_files": [
+      "data/outputs/v_seasonality.csv",
+      "data/outputs/v_monthly_kpis.csv",
+      "data/outputs/v_hotel_totals.csv",
+      "data/outputs/capacity.csv",
+      "data/outputs/capacity_derivation.csv",
+      "data/outputs/daily_performance.csv",
+      "data/outputs/v_cancellation_drivers.csv",
+      "data/outputs/v_cancel_timing.csv",
+      "data/outputs/v_late_cancel_revenue_at_risk.csv",
+      "data/outputs/v_lead_deposit_matrix.csv",
+      "reports/tables/stat_tests_summary.csv",
+      "data/processed/bookings_clean.csv"
+    ],
+    "window_start": "2015-08-01",
+    "window_end": "2017-08-31",
+    "window_days": 762
+  },
+  "hotel_benchmarks": {
+    "City Hotel": {
+      "capacity": 250,
+      "peak_rooms_sold": 226,
+      "peak_date": "2016-08-13",
+      "capacity_buffer": 1.1,
+      "avg_rooms_sold_per_night": 175.67,
+      "window_room_nights_sold": 133860,
+      "window_room_nights_available": 190500,
+      "window_room_revenue": 14285466.42,
+      "window_occupancy_pct": 70.27,
+      "window_adr": 106.72,
+      "window_revpar": 74.99,
+      "threshold_90pct": 225.0,
+      "nights_ge_90pct": 22,
+      "total_nights": 762,
+      "pct_nights_ge_90pct": 2.89,
+      "peak_nights_rooms_sold": 4958,
+      "peak_nights_revenue": 580233.65,
+      "peak_nights_blended_adr": 117.03
+    },
+    "Resort Hotel": {
+      "capacity": 210,
+      "peak_rooms_sold": 187,
+      "peak_date": "2016-03-25",
+      "capacity_buffer": 1.1,
+      "avg_rooms_sold_per_night": 150.13,
+      "window_room_nights_sold": 114401,
+      "window_room_nights_available": 160020,
+      "window_room_revenue": 10901719.74,
+      "window_occupancy_pct": 71.49,
+      "window_adr": 95.29,
+      "window_revpar": 68.13,
+      "threshold_90pct": 189.0,
+      "nights_ge_90pct": 0,
+      "total_nights": 762,
+      "pct_nights_ge_90pct": 0.0,
+      "peak_nights_rooms_sold": 0,
+      "peak_nights_revenue": 0.0,
+      "peak_nights_blended_adr": 0.0
+    }
+  },
+  "seasonality": {
+    "City Hotel": {
+      "seasons": {
+        "Peak": {
+          "month_nums": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "month_names": [
+            "April",
+            "May",
+            "June",
+            "July"
+          ],
+          "months": [
+            {
+              "month_num": 4,
+              "month_name": "April",
+              "avg_occupancy_pct": 81.88,
+              "avg_adr": 110.94,
+              "avg_revpar": 91.36,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 5,
+              "month_name": "May",
+              "avg_occupancy_pct": 82.84,
+              "avg_adr": 121.39,
+              "avg_revpar": 100.78,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 6,
+              "month_name": "June",
+              "avg_occupancy_pct": 81.03,
+              "avg_adr": 119.1,
+              "avg_revpar": 96.87,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 7,
+              "month_name": "July",
+              "avg_occupancy_pct": 86.19,
+              "avg_adr": 118.99,
+              "avg_revpar": 102.61,
+              "n_years_available": 2
+            }
+          ],
+          "unweighted_avg_occupancy_pct": 82.98,
+          "unweighted_avg_adr": 117.6,
+          "unweighted_avg_revpar": 97.91,
+          "total_room_nights_sold": 50636,
+          "total_room_nights_available": 61000,
+          "total_room_revenue": 5975944.61,
+          "blended_occupancy_pct": 83.01,
+          "blended_adr": 118.02,
+          "blended_revpar": 97.97
+        },
+        "Shoulder": {
+          "month_nums": [
+            3,
+            8,
+            9,
+            10
+          ],
+          "month_names": [
+            "March",
+            "August",
+            "September",
+            "October"
+          ],
+          "months": [
+            {
+              "month_num": 3,
+              "month_name": "March",
+              "avg_occupancy_pct": 78.12,
+              "avg_adr": 89.14,
+              "avg_revpar": 69.71,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 8,
+              "month_name": "August",
+              "avg_occupancy_pct": 73.2,
+              "avg_adr": 111.07,
+              "avg_revpar": 85.75,
+              "n_years_available": 3
+            },
+            {
+              "month_num": 9,
+              "month_name": "September",
+              "avg_occupancy_pct": 80.52,
+              "avg_adr": 112.62,
+              "avg_revpar": 91.07,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 10,
+              "month_name": "October",
+              "avg_occupancy_pct": 77.91,
+              "avg_adr": 102.51,
+              "avg_revpar": 80.4,
+              "n_years_available": 2
+            }
+          ],
+          "unweighted_avg_occupancy_pct": 77.44,
+          "unweighted_avg_adr": 103.83,
+          "unweighted_avg_revpar": 81.73,
+          "total_room_nights_sold": 53279,
+          "total_room_nights_available": 69250,
+          "total_room_revenue": 5686155.79,
+          "blended_occupancy_pct": 76.94,
+          "blended_adr": 106.72,
+          "blended_revpar": 82.11
+        },
+        "Low": {
+          "month_nums": [
+            1,
+            2,
+            11,
+            12
+          ],
+          "month_names": [
+            "January",
+            "February",
+            "November",
+            "December"
+          ],
+          "months": [
+            {
+              "month_num": 1,
+              "month_name": "January",
+              "avg_occupancy_pct": 42.38,
+              "avg_adr": 84.28,
+              "avg_revpar": 36.27,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 2,
+              "month_name": "February",
+              "avg_occupancy_pct": 60.34,
+              "avg_adr": 86.66,
+              "avg_revpar": 52.69,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 11,
+              "month_name": "November",
+              "avg_occupancy_pct": 53.44,
+              "avg_adr": 84.68,
+              "avg_revpar": 47.34,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 12,
+              "month_name": "December",
+              "avg_occupancy_pct": 43.77,
+              "avg_adr": 87.01,
+              "avg_revpar": 38.9,
+              "n_years_available": 2
+            }
+          ],
+          "unweighted_avg_occupancy_pct": 49.98,
+          "unweighted_avg_adr": 85.66,
+          "unweighted_avg_revpar": 43.8,
+          "total_room_nights_sold": 29945,
+          "total_room_nights_available": 60250,
+          "total_room_revenue": 2623366.02,
+          "blended_occupancy_pct": 49.7,
+          "blended_adr": 87.61,
+          "blended_revpar": 43.54
+        }
+      },
+      "co_movement": {
+        "max_occupancy": {
+          "month": "July",
+          "month_num": 7,
+          "occupancy_pct": 86.19,
+          "adr": 118.99
+        },
+        "min_occupancy": {
+          "month": "January",
+          "month_num": 1,
+          "occupancy_pct": 42.38,
+          "adr": 84.28
+        },
+        "max_adr": {
+          "month": "May",
+          "month_num": 5,
+          "adr": 121.39,
+          "occupancy_pct": 82.84
+        },
+        "min_adr": {
+          "month": "January",
+          "month_num": 1,
+          "adr": 84.28,
+          "occupancy_pct": 42.38
+        },
+        "peak_to_low_occ_change_pp": -33.0,
+        "peak_to_low_occ_change_pct": -39.77,
+        "peak_to_low_adr_change_val": -31.94,
+        "peak_to_low_adr_change_pct": -27.16
+      }
+    },
+    "Resort Hotel": {
+      "seasons": {
+        "Peak": {
+          "month_nums": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "month_names": [
+            "June",
+            "July",
+            "August",
+            "September"
+          ],
+          "months": [
+            {
+              "month_num": 6,
+              "month_name": "June",
+              "avg_occupancy_pct": 84.28,
+              "avg_adr": 102.1,
+              "avg_revpar": 85.94,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 7,
+              "month_name": "July",
+              "avg_occupancy_pct": 85.16,
+              "avg_adr": 151.73,
+              "avg_revpar": 129.18,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 8,
+              "month_name": "August",
+              "avg_occupancy_pct": 85.9,
+              "avg_adr": 177.16,
+              "avg_revpar": 152.24,
+              "n_years_available": 3
+            },
+            {
+              "month_num": 9,
+              "month_name": "September",
+              "avg_occupancy_pct": 86.06,
+              "avg_adr": 93.97,
+              "avg_revpar": 80.86,
+              "n_years_available": 2
+            }
+          ],
+          "unweighted_avg_occupancy_pct": 85.35,
+          "unweighted_avg_adr": 131.24,
+          "unweighted_avg_revpar": 112.06,
+          "total_room_nights_sold": 49326,
+          "total_room_nights_available": 57750,
+          "total_room_revenue": 6756682.18,
+          "blended_occupancy_pct": 85.41,
+          "blended_adr": 136.98,
+          "blended_revpar": 117.0
+        },
+        "Shoulder": {
+          "month_nums": [
+            3,
+            4,
+            5,
+            10
+          ],
+          "month_names": [
+            "March",
+            "April",
+            "May",
+            "October"
+          ],
+          "months": [
+            {
+              "month_num": 3,
+              "month_name": "March",
+              "avg_occupancy_pct": 71.8,
+              "avg_adr": 56.9,
+              "avg_revpar": 40.84,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 4,
+              "month_name": "April",
+              "avg_occupancy_pct": 76.1,
+              "avg_adr": 75.37,
+              "avg_revpar": 57.54,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 5,
+              "month_name": "May",
+              "avg_occupancy_pct": 82.23,
+              "avg_adr": 74.99,
+              "avg_revpar": 61.68,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 10,
+              "month_name": "October",
+              "avg_occupancy_pct": 78.56,
+              "avg_adr": 64.53,
+              "avg_revpar": 50.87,
+              "n_years_available": 2
+            }
+          ],
+          "unweighted_avg_occupancy_pct": 77.17,
+          "unweighted_avg_adr": 67.95,
+          "unweighted_avg_revpar": 52.73,
+          "total_room_nights_sold": 39870,
+          "total_room_nights_available": 51660,
+          "total_room_revenue": 2722073.29,
+          "blended_occupancy_pct": 77.18,
+          "blended_adr": 68.27,
+          "blended_revpar": 52.69
+        },
+        "Low": {
+          "month_nums": [
+            1,
+            2,
+            11,
+            12
+          ],
+          "month_names": [
+            "January",
+            "February",
+            "November",
+            "December"
+          ],
+          "months": [
+            {
+              "month_num": 1,
+              "month_name": "January",
+              "avg_occupancy_pct": 40.29,
+              "avg_adr": 56.37,
+              "avg_revpar": 22.67,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 2,
+              "month_name": "February",
+              "avg_occupancy_pct": 56.11,
+              "avg_adr": 53.44,
+              "avg_revpar": 30.13,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 11,
+              "month_name": "November",
+              "avg_occupancy_pct": 58.31,
+              "avg_adr": 50.36,
+              "avg_revpar": 29.49,
+              "n_years_available": 2
+            },
+            {
+              "month_num": 12,
+              "month_name": "December",
+              "avg_occupancy_pct": 45.39,
+              "avg_adr": 66.79,
+              "avg_revpar": 30.46,
+              "n_years_available": 2
+            }
+          ],
+          "unweighted_avg_occupancy_pct": 50.03,
+          "unweighted_avg_adr": 56.74,
+          "unweighted_avg_revpar": 28.19,
+          "total_room_nights_sold": 25205,
+          "total_room_nights_available": 50610,
+          "total_room_revenue": 1422964.27,
+          "blended_occupancy_pct": 49.8,
+          "blended_adr": 56.46,
+          "blended_revpar": 28.12
+        }
+      },
+      "co_movement": {
+        "max_occupancy": {
+          "month": "September",
+          "month_num": 9,
+          "occupancy_pct": 86.06,
+          "adr": 93.97
+        },
+        "min_occupancy": {
+          "month": "January",
+          "month_num": 1,
+          "occupancy_pct": 40.29,
+          "adr": 56.37
+        },
+        "max_adr": {
+          "month": "August",
+          "month_num": 8,
+          "adr": 177.16,
+          "occupancy_pct": 85.9
+        },
+        "min_adr": {
+          "month": "November",
+          "month_num": 11,
+          "adr": 50.36,
+          "occupancy_pct": 58.31
+        },
+        "peak_to_low_occ_change_pp": -35.32,
+        "peak_to_low_occ_change_pct": -41.38,
+        "peak_to_low_adr_change_val": -74.5,
+        "peak_to_low_adr_change_pct": -56.77
+      }
+    }
+  },
+  "pricing_rules_and_scenarios": {
+    "city_hotel_peak_night_premium_10pct": {
+      "description": "Apply a 10% rate premium on nights where occupancy >= 90% of capacity (22 nights)",
+      "formula": "delta_revenue = peak_nights_revenue * 0.10",
+      "inputs": {
+        "peak_nights_count": 22,
+        "peak_nights_rooms_sold": 4958,
+        "peak_nights_revenue": 580233.65,
+        "baseline_blended_adr": 117.03,
+        "premium_rate_pct": 10.0
+      },
+      "delta_revenue": 58023.37,
+      "new_revenue": 638257.02,
+      "new_blended_adr": 128.73,
+      "label": "Scenario, not forecast",
+      "caveat": "Higher prices would probably reduce occupancy; the dataset cannot measure price elasticity."
+    },
+    "city_hotel_peak_season_premium_5pct": {
+      "description": "Apply a 5% rate premium across all 4 Peak season months (Apr, May, Jun, Jul)",
+      "formula": "delta_revenue = peak_season_room_revenue * 0.05",
+      "inputs": {
+        "peak_season_revenue": 5975944.61,
+        "peak_season_rooms_sold": 50636,
+        "premium_rate_pct": 5.0
+      },
+      "delta_revenue": 298797.23,
+      "new_revenue": 6274741.84,
+      "label": "Scenario, not forecast",
+      "caveat": "Higher prices would probably reduce occupancy; the dataset cannot measure price elasticity."
+    },
+    "low_season_rate_floor_rules": {
+      "city_hotel_low_floor": {
+        "recommended_floor_adr": 85.0,
+        "current_blended_adr": 87.61,
+        "current_low_revenue": 2623366.02,
+        "current_low_rooms_sold": 29945,
+        "rationale": "City Hotel Low months achieve blended ADR of $86.08 in v_monthly_kpis (unweighted $85.66); a strict $85.00 rate floor prevents margin-eroding flash discounting below direct marginal cost."
+      },
+      "resort_hotel_low_floor": {
+        "recommended_floor_adr": 55.0,
+        "current_blended_adr": 56.46,
+        "current_low_revenue": 1422964.27,
+        "current_low_rooms_sold": 25205,
+        "rationale": "Resort Hotel Low months reach $50.36 in November and $53.44 in February; a $55.00 rate floor establishes a pricing baseline while relying on value-add inclusions rather than room-rate slashing."
+      }
+    }
+  },
+  "price_occupancy_gaps": {
+    "group1_high_occ_low_adr": {
+      "City Hotel": {
+        "thresholds": {
+          "occupancy_pct_min": 85.0,
+          "window_adr_ceiling": 106.72
+        },
+        "months_count": 0,
+        "months": [],
+        "total_room_nights_sold": 0,
+        "total_room_nights_available": 0,
+        "total_room_revenue": 0.0,
+        "blended_occupancy_pct": 0.0,
+        "blended_adr": 0.0
+      },
+      "Resort Hotel": {
+        "thresholds": {
+          "occupancy_pct_min": 85.0,
+          "window_adr_ceiling": 95.29
+        },
+        "months_count": 2,
+        "months": [
+          {
+            "month_start": "2015-09-01",
+            "occupancy_pct": 86.32,
+            "adr": 88.85,
+            "room_nights_sold": 5438,
+            "room_nights_available": 6300,
+            "room_revenue": 483189.78,
+            "revpar": 76.7
+          },
+          {
+            "month_start": "2016-06-01",
+            "occupancy_pct": 85.32,
+            "adr": 91.63,
+            "room_nights_sold": 5375,
+            "room_nights_available": 6300,
+            "room_revenue": 492518.87,
+            "revpar": 78.18
+          }
+        ],
+        "total_room_nights_sold": 10813,
+        "total_room_nights_available": 12600,
+        "total_room_revenue": 975708.65,
+        "blended_occupancy_pct": 85.82,
+        "blended_adr": 90.23
+      },
+      "scenarios": {
+        "adr_increase_5pct": {
+          "formula": "delta_revenue = group1_room_revenue * 0.05",
+          "inputs": {
+            "group1_room_revenue": 975708.65,
+            "group1_room_nights_sold": 10813,
+            "baseline_blended_adr": 90.23,
+            "rate_increase_pct": 5.0
+          },
+          "delta_revenue": 48785.43,
+          "new_revenue": 1024494.08,
+          "new_blended_adr": 94.75,
+          "label": "Scenario, not forecast",
+          "caveat": "Higher prices would probably reduce occupancy; the dataset cannot measure price elasticity."
+        },
+        "adr_brought_to_window_average": {
+          "formula": "delta_revenue = (group1_room_nights_sold * window_adr) - group1_room_revenue",
+          "inputs": {
+            "group1_room_revenue": 975708.65,
+            "group1_room_nights_sold": 10813,
+            "window_adr": 95.29
+          },
+          "delta_revenue": 54662.12,
+          "new_revenue": 1030370.77,
+          "new_blended_adr": 95.29,
+          "label": "Scenario, not forecast",
+          "caveat": "Higher prices would probably reduce occupancy; the dataset cannot measure price elasticity."
+        }
+      }
+    },
+    "group2_low_occ_low_adr": {
+      "City Hotel": {
+        "thresholds": {
+          "window_occupancy_ceiling": 70.27,
+          "window_adr_ceiling": 106.72
+        },
+        "months_count": 8,
+        "months": [
+          {
+            "month_start": "2015-08-01",
+            "occupancy_pct": 44.39,
+            "adr": 80.07,
+            "room_nights_sold": 3440,
+            "room_nights_available": 7750,
+            "room_revenue": 275450.09,
+            "revpar": 35.54
+          },
+          {
+            "month_start": "2015-11-01",
+            "occupancy_pct": 36.33,
+            "adr": 72.48,
+            "room_nights_sold": 2725,
+            "room_nights_available": 7500,
+            "room_revenue": 197495.38,
+            "revpar": 26.33
+          },
+          {
+            "month_start": "2015-12-01",
+            "occupancy_pct": 33.95,
+            "adr": 78.72,
+            "room_nights_sold": 2631,
+            "room_nights_available": 7750,
+            "room_revenue": 207115.64,
+            "revpar": 26.72
+          },
+          {
+            "month_start": "2016-01-01",
+            "occupancy_pct": 31.73,
+            "adr": 79.08,
+            "room_nights_sold": 2459,
+            "room_nights_available": 7750,
+            "room_revenue": 194455.18,
+            "revpar": 25.09
+          },
+          {
+            "month_start": "2016-02-01",
+            "occupancy_pct": 51.57,
+            "adr": 82.01,
+            "room_nights_sold": 3739,
+            "room_nights_available": 7250,
+            "room_revenue": 306620.56,
+            "revpar": 42.29
+          },
+          {
+            "month_start": "2016-12-01",
+            "occupancy_pct": 53.59,
+            "adr": 95.3,
+            "room_nights_sold": 4153,
+            "room_nights_available": 7750,
+            "room_revenue": 395765.3,
+            "revpar": 51.07
+          },
+          {
+            "month_start": "2017-01-01",
+            "occupancy_pct": 53.03,
+            "adr": 89.47,
+            "room_nights_sold": 4110,
+            "room_nights_available": 7750,
+            "room_revenue": 367719.3,
+            "revpar": 47.45
+          },
+          {
+            "month_start": "2017-02-01",
+            "occupancy_pct": 69.1,
+            "adr": 91.3,
+            "room_nights_sold": 4837,
+            "room_nights_available": 7000,
+            "room_revenue": 441617.92,
+            "revpar": 63.09
+          }
+        ],
+        "total_room_nights_sold": 28094,
+        "total_room_nights_available": 60500,
+        "total_room_revenue": 2386239.37,
+        "blended_occupancy_pct": 46.44,
+        "blended_adr": 84.94,
+        "scenario_occupancy_stimulation_5pp": {
+          "formula": "delta_revenue = room_nights_available * 0.05 * blended_adr",
+          "inputs": {
+            "room_nights_available": 60500,
+            "delta_occupancy_pct": 5.0,
+            "blended_adr": 84.94,
+            "baseline_revenue": 2386239.37
+          },
+          "additional_room_nights_sold": 3025.0,
+          "delta_revenue": 256943.5,
+          "new_revenue": 2643182.87,
+          "new_occupancy_pct": 51.44,
+          "label": "Scenario, not forecast",
+          "caveat": "Demand stimulation assumes that price remains at historical baseline and incremental variable costs are omitted; dataset cannot measure price elasticity."
+        }
+      },
+      "Resort Hotel": {
+        "thresholds": {
+          "window_occupancy_ceiling": 71.49,
+          "window_adr_ceiling": 95.29
+        },
+        "months_count": 9,
+        "months": [
+          {
+            "month_start": "2015-11-01",
+            "occupancy_pct": 52.3,
+            "adr": 48.3,
+            "room_nights_sold": 3295,
+            "room_nights_available": 6300,
+            "room_revenue": 159162.61,
+            "revpar": 25.26
+          },
+          {
+            "month_start": "2015-12-01",
+            "occupancy_pct": 41.2,
+            "adr": 63.23,
+            "room_nights_sold": 2682,
+            "room_nights_available": 6510,
+            "room_revenue": 169591.31,
+            "revpar": 26.05
+          },
+          {
+            "month_start": "2016-01-01",
+            "occupancy_pct": 32.5,
+            "adr": 56.86,
+            "room_nights_sold": 2116,
+            "room_nights_available": 6510,
+            "room_revenue": 120315.21,
+            "revpar": 18.48
+          },
+          {
+            "month_start": "2016-02-01",
+            "occupancy_pct": 49.72,
+            "adr": 51.24,
+            "room_nights_sold": 3028,
+            "room_nights_available": 6090,
+            "room_revenue": 155152.92,
+            "revpar": 25.48
+          },
+          {
+            "month_start": "2016-03-01",
+            "occupancy_pct": 66.34,
+            "adr": 57.17,
+            "room_nights_sold": 4319,
+            "room_nights_available": 6510,
+            "room_revenue": 246926.91,
+            "revpar": 37.93
+          },
+          {
+            "month_start": "2016-11-01",
+            "occupancy_pct": 64.32,
+            "adr": 52.41,
+            "room_nights_sold": 4052,
+            "room_nights_available": 6300,
+            "room_revenue": 212374.39,
+            "revpar": 33.71
+          },
+          {
+            "month_start": "2016-12-01",
+            "occupancy_pct": 49.57,
+            "adr": 70.35,
+            "room_nights_sold": 3227,
+            "room_nights_available": 6510,
+            "room_revenue": 227019.95,
+            "revpar": 34.87
+          },
+          {
+            "month_start": "2017-01-01",
+            "occupancy_pct": 48.08,
+            "adr": 55.87,
+            "room_nights_sold": 3130,
+            "room_nights_available": 6510,
+            "room_revenue": 174882.46,
+            "revpar": 26.86
+          },
+          {
+            "month_start": "2017-02-01",
+            "occupancy_pct": 62.5,
+            "adr": 55.64,
+            "room_nights_sold": 3675,
+            "room_nights_available": 5880,
+            "room_revenue": 204465.42,
+            "revpar": 34.77
+          }
+        ],
+        "total_room_nights_sold": 29524,
+        "total_room_nights_available": 57120,
+        "total_room_revenue": 1669891.18,
+        "blended_occupancy_pct": 51.69,
+        "blended_adr": 56.56,
+        "scenario_occupancy_stimulation_5pp": {
+          "formula": "delta_revenue = room_nights_available * 0.05 * blended_adr",
+          "inputs": {
+            "room_nights_available": 57120,
+            "delta_occupancy_pct": 5.0,
+            "blended_adr": 56.56,
+            "baseline_revenue": 1669891.18
+          },
+          "additional_room_nights_sold": 2856.0,
+          "delta_revenue": 161535.36,
+          "new_revenue": 1831426.54,
+          "new_occupancy_pct": 56.69,
+          "label": "Scenario, not forecast",
+          "caveat": "Demand stimulation assumes that price remains at historical baseline and incremental variable costs are omitted; dataset cannot measure price elasticity."
+        }
+      },
+      "portfolio_summary": {
+        "total_hotel_months": 17,
+        "total_room_nights_sold": 57618,
+        "total_room_nights_available": 117620,
+        "total_room_revenue": 4056130.55,
+        "blended_occupancy_pct": 48.99,
+        "blended_adr": 70.4,
+        "scenario_combined_stimulation_5pp": {
+          "formula": "delta_revenue = city_delta_rev + resort_delta_rev",
+          "city_delta_rev": 256943.5,
+          "resort_delta_rev": 161535.36,
+          "total_additional_room_nights": 5881.0,
+          "total_delta_revenue": 418478.86,
+          "label": "Scenario, not forecast",
+          "caveat": "Demand stimulation assumes that price remains at historical baseline and incremental variable costs are omitted; dataset cannot measure price elasticity."
+        }
+      }
+    }
+  },
+  "cancellations": {
+    "overall": {
+      "total_bookings": 119388,
+      "total_cancellations": 44223,
+      "overall_cancel_rate_pct": 37.04,
+      "city_hotel_cancel_rate_pct": 41.73,
+      "resort_hotel_cancel_rate_pct": 27.76
+    },
+    "lead_time": {
+      "lead_buckets": [
+        {
+          "lead_bucket": "0-7",
+          "sort_order": 1.0,
+          "bookings": 19746,
+          "cancellations": 1902,
+          "cancel_rate_pct": 9.6,
+          "share_of_bookings_pct": 16.5,
+          "cancel_rate_vs_hotel_avg_pp": -27.4
+        },
+        {
+          "lead_bucket": "8-30",
+          "sort_order": 2.0,
+          "bookings": 18960,
+          "cancellations": 5283,
+          "cancel_rate_pct": 27.9,
+          "share_of_bookings_pct": 15.9,
+          "cancel_rate_vs_hotel_avg_pp": -9.2
+        },
+        {
+          "lead_bucket": "31-90",
+          "sort_order": 3.0,
+          "bookings": 29552,
+          "cancellations": 11140,
+          "cancel_rate_pct": 37.7,
+          "share_of_bookings_pct": 24.8,
+          "cancel_rate_vs_hotel_avg_pp": 0.7
+        },
+        {
+          "lead_bucket": "91-180",
+          "sort_order": 4.0,
+          "bookings": 26439,
+          "cancellations": 11821,
+          "cancel_rate_pct": 44.7,
+          "share_of_bookings_pct": 22.1,
+          "cancel_rate_vs_hotel_avg_pp": 7.7
+        },
+        {
+          "lead_bucket": "181+",
+          "sort_order": 5.0,
+          "bookings": 24691,
+          "cancellations": 14077,
+          "cancel_rate_pct": 57.0,
+          "share_of_bookings_pct": 20.7,
+          "cancel_rate_vs_hotel_avg_pp": 20.0
+        }
+      ],
+      "statistical_tests": {
+        "test_t3_chisq": {
+          "test_name": "Chi-Square Test of Independence",
+          "sample_size": 119388,
+          "chi2": 11940.86,
+          "df": 4,
+          "p_value": "< 1e-300",
+          "effect_size_metric": "Cramer's V",
+          "effect_size_value": 0.3163,
+          "interpretation": "Strong monotonic increase: cancellations scale 6-fold from 9.63% (0-7d) to 57.01% (181+d)."
+        },
+        "test_t4_mann_whitney": {
+          "test_name": "Mann-Whitney U Test",
+          "sample_size": 119388,
+          "u_statistic": 2291139948,
+          "p_value": "< 1e-300",
+          "effect_size_metric": "Rank-biserial r",
+          "effect_size_value": 0.3785,
+          "median_canceled_lead_time": 113.0,
+          "median_non_canceled_lead_time": 45.0,
+          "median_shift_days": 68.0,
+          "median_shift_pct": 151.1,
+          "interpretation": "Canceled bookings exhibit a median lead time 68.0 days longer than non-canceled stays."
+        },
+        "test_t6_3_robustness": {
+          "sample_scope": "Excluding duplicates (is_duplicate_row = 0)",
+          "sample_size": 87394,
+          "chi2": 5005.16,
+          "df": 4,
+          "p_value": "< 1e-300",
+          "cramers_v": 0.2393,
+          "rate_0_7": 8.43,
+          "rate_181_plus": 39.74,
+          "interpretation": "Monotonic escalation persists after deduplication."
+        }
+      },
+      "scenario_181_plus_reduction_10pct": {
+        "description": "Tiered deposit and reconfirmation protocol reduces 181+ lead cancellations by 10%",
+        "formula": "avoided_cancellations = canceled_bookings * 0.10; preserved_room_nights = canceled_room_nights * 0.10; preserved_revenue = canceled_revenue * 0.10",
+        "inputs": {
+          "canceled_bookings_181_plus": 14077,
+          "canceled_room_nights_181_plus": 49889,
+          "canceled_room_revenue_181_plus": 4775283.0,
+          "baseline_adr": 95.72,
+          "reduction_pct": 10.0
+        },
+        "avoided_cancellations": 1407.7,
+        "preserved_room_nights": 4988.9,
+        "preserved_revenue": 477528.3,
+        "label": "Scenario, not forecast",
+        "caveat": "Higher deposit requirements or rigid reconfirmation steps might deter price-sensitive long-lead bookers; the dataset cannot measure price or policy elasticity."
+      }
+    },
+    "deposit_type": {
+      "deposit_types": [
+        {
+          "deposit_type": "No Deposit",
+          "bookings": 104640,
+          "cancellations": 29694,
+          "cancel_rate_pct": 28.4,
+          "share_of_bookings_pct": 87.6,
+          "cancel_rate_vs_hotel_avg_pp": -8.7
+        },
+        {
+          "deposit_type": "Non Refund",
+          "bookings": 14586,
+          "cancellations": 14493,
+          "cancel_rate_pct": 99.4,
+          "share_of_bookings_pct": 12.2,
+          "cancel_rate_vs_hotel_avg_pp": 62.3
+        },
+        {
+          "deposit_type": "Refundable",
+          "bookings": 162,
+          "cancellations": 36,
+          "cancel_rate_pct": 22.2,
+          "share_of_bookings_pct": 0.1,
+          "cancel_rate_vs_hotel_avg_pp": -14.8
+        }
+      ],
+      "statistical_test": {
+        "test_id": "T2",
+        "test_name": "Chi-Square Test of Independence",
+        "sample_size": 119388,
+        "chi2": 27675.45,
+        "df": 2,
+        "p_value": "< 1e-300",
+        "effect_size_metric": "Cramer's V",
+        "effect_size_value": 0.4815
+      },
+      "counter_intuitive_observation": "Non-refundable deposits are designed to eliminate or deter cancellation by imposing financial forfeiture; an observed cancel rate of 99.36% is completely counter-intuitive.",
+      "non_refund_totals": {
+        "bookings": 14586,
+        "cancellations": 14493,
+        "cancel_rate_pct": 99.36,
+        "canceled_room_nights": 39358,
+        "canceled_room_revenue": 3598937.03
+      },
+      "non_refund_cross_tabulations": {
+        "market_segment": [
+          {
+            "market_segment": "Groups",
+            "bookings": 9172,
+            "cancellations": 9110,
+            "cancel_rate_pct": 99.32,
+            "share_of_non_ref_pct": 62.88
+          },
+          {
+            "market_segment": "Offline TA/TO",
+            "bookings": 5005,
+            "cancellations": 5002,
+            "cancel_rate_pct": 99.94,
+            "share_of_non_ref_pct": 34.31
+          },
+          {
+            "market_segment": "Corporate",
+            "bookings": 334,
+            "cancellations": 312,
+            "cancel_rate_pct": 93.41,
+            "share_of_non_ref_pct": 2.29
+          },
+          {
+            "market_segment": "Online TA",
+            "bookings": 56,
+            "cancellations": 53,
+            "cancel_rate_pct": 94.64,
+            "share_of_non_ref_pct": 0.38
+          },
+          {
+            "market_segment": "Direct",
+            "bookings": 19,
+            "cancellations": 16,
+            "cancel_rate_pct": 84.21,
+            "share_of_non_ref_pct": 0.13
+          }
+        ],
+        "distribution_channel": [
+          {
+            "distribution_channel": "TA/TO",
+            "bookings": 13650,
+            "cancellations": 13597,
+            "cancel_rate_pct": 99.61,
+            "share_of_non_ref_pct": 93.58
+          },
+          {
+            "distribution_channel": "Corporate",
+            "bookings": 538,
+            "cancellations": 508,
+            "cancel_rate_pct": 94.42,
+            "share_of_non_ref_pct": 3.69
+          },
+          {
+            "distribution_channel": "Direct",
+            "bookings": 398,
+            "cancellations": 388,
+            "cancel_rate_pct": 97.49,
+            "share_of_non_ref_pct": 2.73
+          }
+        ],
+        "top_countries": [
+          {
+            "country": "PRT",
+            "bookings": 14175,
+            "cancellations": 14139,
+            "cancel_rate_pct": 99.75,
+            "share_of_non_ref_pct": 97.18
+          },
+          {
+            "country": "GBR",
+            "bookings": 138,
+            "cancellations": 132,
+            "cancel_rate_pct": 95.65,
+            "share_of_non_ref_pct": 0.95
+          },
+          {
+            "country": "ESP",
+            "bookings": 131,
+            "cancellations": 131,
+            "cancel_rate_pct": 100.0,
+            "share_of_non_ref_pct": 0.9
+          },
+          {
+            "country": "DEU",
+            "bookings": 44,
+            "cancellations": 1,
+            "cancel_rate_pct": 2.27,
+            "share_of_non_ref_pct": 0.3
+          },
+          {
+            "country": "POL",
+            "bookings": 38,
+            "cancellations": 37,
+            "cancel_rate_pct": 97.37,
+            "share_of_non_ref_pct": 0.26
+          },
+          {
+            "country": "BEL",
+            "bookings": 15,
+            "cancellations": 15,
+            "cancel_rate_pct": 100.0,
+            "share_of_non_ref_pct": 0.1
+          },
+          {
+            "country": "CN",
+            "bookings": 14,
+            "cancellations": 13,
+            "cancel_rate_pct": 92.86,
+            "share_of_non_ref_pct": 0.1
+          },
+          {
+            "country": "Unknown",
+            "bookings": 14,
+            "cancellations": 14,
+            "cancel_rate_pct": 100.0,
+            "share_of_non_ref_pct": 0.1
+          },
+          {
+            "country": "FRA",
+            "bookings": 11,
+            "cancellations": 10,
+            "cancel_rate_pct": 90.91,
+            "share_of_non_ref_pct": 0.08
+          },
+          {
+            "country": "TUR",
+            "bookings": 3,
+            "cancellations": 0,
+            "cancel_rate_pct": 0.0,
+            "share_of_non_ref_pct": 0.02
+          }
+        ],
+        "hotel": [
+          {
+            "hotel": "City Hotel",
+            "bookings": 12867,
+            "cancellations": 12843,
+            "cancel_rate_pct": 99.81,
+            "share_of_non_ref_pct": 88.21
+          },
+          {
+            "hotel": "Resort Hotel",
+            "bookings": 1719,
+            "cancellations": 1650,
+            "cancel_rate_pct": 95.99,
+            "share_of_non_ref_pct": 11.79
+          }
+        ]
+      },
+      "investigative_hypotheses": [
+        {
+          "hypothesis_id": "H1",
+          "name": "Wholesale Group Block Option Dropping",
+          "description": "Portuguese wholesale tour operators contracted room blocks under standard non-refundable rate codes but released unsold inventory back to the hotel prior to release cutoffs without financial penalty."
+        },
+        {
+          "hypothesis_id": "H2",
+          "name": "PMS Logging and Recording Artefact",
+          "description": "Property management system integration may have defaulted cancelled wholesale reservations or uncollected deposits to a 'Non Refund' label upon status change to 'Canceled'."
+        },
+        {
+          "hypothesis_id": "H3",
+          "name": "Duplicate Booking / Re-booking Cycles",
+          "description": "Tour operator software agents may have re-booked blocks multiple times, creating synthetic cancelled records (supported by the high duplicate rate in raw data)."
+        }
+      ],
+      "scenario_non_refund_reform_10pct": {
+        "description": "Contractual and operational audit eliminates 10% of phantom Non Refund group block cancellations",
+        "formula": "avoided_cancellations = total_non_ref_cancellations * 0.10; preserved_room_nights = total_non_ref_canceled_nights * 0.10; preserved_revenue = total_non_ref_canceled_revenue * 0.10",
+        "inputs": {
+          "canceled_non_refund_bookings": 14493,
+          "canceled_non_refund_room_nights": 39358,
+          "canceled_non_refund_room_revenue": 3598937.03,
+          "reduction_pct": 10.0
+        },
+        "avoided_cancellations": 1449.3,
+        "preserved_room_nights": 3935.8,
+        "preserved_revenue": 359893.7,
+        "label": "Scenario, not forecast",
+        "caveat": "Hypothetical scenario based on administrative contract reform; does not imply realized cash collections if deposits were never collected."
+      }
+    },
+    "timing_and_late_cancellations": {
+      "timing_buckets": [
+        {
+          "timing_bucket": "0-1 days",
+          "sort_order": 1,
+          "cancellations": 1511,
+          "share_of_cancellations_pct": 3.5,
+          "avg_lead_time": 34.7,
+          "avg_days_cancelled_before_arrival": 0.4,
+          "room_revenue_at_risk": 371881.76
+        },
+        {
+          "timing_bucket": "2-7 days",
+          "sort_order": 2,
+          "cancellations": 3624,
+          "share_of_cancellations_pct": 8.4,
+          "avg_lead_time": 59.6,
+          "avg_days_cancelled_before_arrival": 4.5,
+          "room_revenue_at_risk": 1161604.9
+        },
+        {
+          "timing_bucket": "8-14 days",
+          "sort_order": 3,
+          "cancellations": 3441,
+          "share_of_cancellations_pct": 8.0,
+          "avg_lead_time": 77.0,
+          "avg_days_cancelled_before_arrival": 11.0,
+          "room_revenue_at_risk": 1305296.09
+        },
+        {
+          "timing_bucket": "15-30 days",
+          "sort_order": 4,
+          "cancellations": 5926,
+          "share_of_cancellations_pct": 13.8,
+          "avg_lead_time": 89.4,
+          "avg_days_cancelled_before_arrival": 21.6,
+          "room_revenue_at_risk": 2317465.12
+        },
+        {
+          "timing_bucket": "31-60 days",
+          "sort_order": 5,
+          "cancellations": 8070,
+          "share_of_cancellations_pct": 18.8,
+          "avg_lead_time": 116.2,
+          "avg_days_cancelled_before_arrival": 44.5,
+          "room_revenue_at_risk": 3013591.21
+        },
+        {
+          "timing_bucket": "61-90 days",
+          "sort_order": 6,
+          "cancellations": 4896,
+          "share_of_cancellations_pct": 11.4,
+          "avg_lead_time": 143.7,
+          "avg_days_cancelled_before_arrival": 74.1,
+          "room_revenue_at_risk": 1957516.27
+        },
+        {
+          "timing_bucket": "91+ days",
+          "sort_order": 7,
+          "cancellations": 15548,
+          "share_of_cancellations_pct": 36.1,
+          "avg_lead_time": 233.6,
+          "avg_days_cancelled_before_arrival": 186.1,
+          "room_revenue_at_risk": 6145000.76
+        }
+      ],
+      "late_cancellations_7d_summary": {
+        "total_late_cancellations": 5135,
+        "share_of_timed_cancellations_pct": 11.94,
+        "share_of_all_cancellations_pct": 11.61,
+        "total_late_room_nights": 14841,
+        "avg_nights_per_late_cancellation": 2.89,
+        "late_cancel_revenue_at_risk_upper_bound": 1533486.66,
+        "total_potential_revenue": 42718161.33,
+        "pct_of_total_potential_revenue_at_risk": 3.59,
+        "avg_adr_of_late_cancellations": 103.33,
+        "by_hotel": {
+          "City Hotel": {
+            "late_cancellations": 3870,
+            "late_room_nights": 10864,
+            "revenue_at_risk": 1167162.59,
+            "avg_adr": 107.43
+          },
+          "Resort Hotel": {
+            "late_cancellations": 1265,
+            "late_room_nights": 3977,
+            "revenue_at_risk": 366324.07,
+            "avg_adr": 92.11
+          }
+        }
+      },
+      "scenario_late_cancellations_reduction_10pct": {
+        "description": "Reconfirmation protocol and 7-day cancellation window reduces late cancellations (<=7 days) by 10%",
+        "formula": "avoided_late_cancellations = total_late_cancellations * 0.10; covered_room_nights = total_late_room_nights * 0.10; covered_upper_bound_revenue = total_late_cancel_revenue_at_risk * 0.10",
+        "inputs": {
+          "total_late_cancellations_7d": 5135,
+          "total_late_room_nights": 14841,
+          "total_late_cancel_revenue_at_risk": 1533486.66,
+          "reduction_pct": 10.0
+        },
+        "avoided_late_cancellations": 513.5,
+        "covered_room_nights": 1484.1,
+        "covered_upper_bound_revenue": 153348.67,
+        "by_hotel_breakdown": {
+          "City Hotel": {
+            "avoided_late_cancellations": 387.0,
+            "covered_room_nights": 1086.4,
+            "covered_revenue": 116716.26
+          },
+          "Resort Hotel": {
+            "avoided_late_cancellations": 126.5,
+            "covered_room_nights": 397.7,
+            "covered_revenue": 36632.41
+          }
+        },
+        "label": "Scenario, not forecast",
+        "caveat": "Revenue at risk represents an upper bound assuming all un-cancelled rooms would have been paid at full rate; it does not account for rooms resold before arrival or replacement bookings."
+      }
+    }
+  }
+}

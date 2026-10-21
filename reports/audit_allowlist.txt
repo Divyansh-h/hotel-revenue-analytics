@@ -1,0 +1,92 @@
+# Allowed exceptions for number audit
+# Format: entry | reason
+
+### 1 | Section number for Finding
+### 2 | Section number for Evidence
+### 3 | Section number for Recommended action
+### 4 | Section number for Expected impact
+1. | Section or numbered list item 1
+2. | Section or numbered list item 2
+3. | Section or numbered list item 3
+4. | Section or numbered list item 4
+1 | Section numeral 1
+2 | Section numeral 2
+3 | Section numeral 3
+4 | Section numeral 4
+
+# KPI definitions and cleaning decision labels
+K1 | KPI definition rule label for room-nights sold
+K2 | KPI definition rule label for room revenue
+K3 | KPI definition rule label for ADR
+K4 | KPI definition rule label for occupancy and RevPAR
+K5 | KPI definition rule label for cancellation rate
+K6 | KPI definition rule label for stay conversion proxy
+K7 | KPI definition rule label prohibiting segment-level occupancy and RevPAR
+D1 | Cleaning decision rule label for booking ID
+D2 | Cleaning decision rule label for arrival date derivation
+D3 | Cleaning decision rule label for missing value imputations
+D4 | Cleaning decision rule label for derived night and guest metrics
+D5 | Cleaning decision rule label for ADR outlier exclusions
+D6 | Cleaning decision rule label for zero nights and guests flags
+D7 | Cleaning decision rule label for duplicate row handling
+D8 | Cleaning decision rule label for reservation status categories
+D9 | Cleaning decision rule label for lead time buckets
+D10 | Cleaning decision rule label for room type mismatch flag
+D11 | Cleaning decision rule label for days cancelled before arrival
+D12 | Cleaning decision rule label for boolean representation
+W1 | Rule label for reliable window 2015-08-01 to 2017-08-31
+W2 | Rule label for capacity derivation assumption
+R1 | Global rule label for zero hardcoded figures and source tagging
+R2 | Global rule label for excluded rows logging
+R3 | Global rule label for idempotent scripts
+R4 | Global rule label for script execution verification
+R5 | Global rule label for strict non-loosening checks
+R6 | Global rule label for decision log maintenance
+R7 | Global rule label for snake_case and database conventions
+R8 | Global rule label for dependency governance
+R9 | Global rule label for database safety
+R10 | Global rule label for file locations and execution conventions
+
+# Statistical test and hypothesis labels
+T1 | Statistical test label for City vs Resort two-proportion z-test
+T2 | Statistical test label for deposit type chi-square test
+T3 | Statistical test label for lead bucket chi-square test
+T4 | Statistical test label for lead time Mann-Whitney U test
+T5 | Statistical test label for multiple logistic regression
+T6 | Statistical test label for duplicate sensitivity robustness tests
+T6.1 | Statistical test label for robustness two-proportion z-test
+T6.2 | Statistical test label for robustness deposit chi-square test
+T6.3 | Statistical test label for robustness lead bucket chi-square test
+H1 | Hypothesis label for wholesale group block option dropping
+H2 | Hypothesis label for PMS logging and recording artefact
+H3 | Hypothesis label for duplicate booking cycles
+
+# Scenario and validation labels
+A1 | Scenario label for compression pricing / overbooking capacity pilot
+A2 | Scenario label for City Hotel peak season rate premium
+B1 | Scenario label for shoulder gap closure / room mismatch reduction
+B2 | Scenario label for window ADR parity closure
+B3 | Scenario label for off-peak winter demand stimulation
+C1 | Scenario label for group reallocation / commercial mix shift
+S1 | Validation scenario label for unsegmented baseline
+S2 | Validation scenario label for City Hotel filter
+S3 | Validation scenario label for Resort Hotel 2016 filter
+S4 | Validation scenario label for Online TA filter
+S5 | Validation scenario label for Direct 2017 filter
+S6 | Validation scenario label for City Hotel Groups 2016 filter
+
+# Report and prompt identifiers
+01 | Report numbering in filename 01_pricing_seasonality.md
+02 | Report numbering in filename 02_cancellations.md
+03 | Report numbering in filename 03_overbooking_mix.md
+Prompt 2.3 | Historical prompt benchmark reference for peak night capacity
+Prompt 4.3 | Historical prompt benchmark reference for dimensional star schema
+Prompt 4.10 | Historical prompt benchmark reference for Power BI validation
+
+# Categorical grouping and phrase labels
+Group 1 | Operational classification label for underpriced peak demand months
+Group 2 | Operational classification label for low-occupancy low-ADR shoulder/winter months
+1 in 2 | Idiomatic phrase in 'more than 1 in 2 checked-in guests reassigned'
+NTILE 3 | SQL ranking function parameter for seasonal tertiles
+1-indexed | Analytical convention description for row indexing
+0/1 | Binary flag representation label

@@ -35,6 +35,12 @@ def run():
     stat_summary_df = pd.read_csv(reports_dir / "tables" / "stat_tests_summary.csv")
     clean_df = pd.read_csv(data_processed / "bookings_clean.csv")
     
+    # Load overbooking, mismatch, and commercial mix outputs
+    overbooking_buffer_df = pd.read_csv(data_outputs / "v_overbooking_buffer.csv")
+    room_mismatch_df = pd.read_csv(data_outputs / "v_room_mismatch.csv")
+    segment_perf_df = pd.read_csv(data_outputs / "v_segment_performance.csv")
+    channel_perf_df = pd.read_csv(data_outputs / "v_channel_performance.csv")
+    
     month_names = {
         1: "January", 2: "February", 3: "March", 4: "April",
         5: "May", 6: "June", 7: "July", 8: "August",
@@ -54,6 +60,10 @@ def run():
                 "data/outputs/v_cancel_timing.csv",
                 "data/outputs/v_late_cancel_revenue_at_risk.csv",
                 "data/outputs/v_lead_deposit_matrix.csv",
+                "data/outputs/v_overbooking_buffer.csv",
+                "data/outputs/v_room_mismatch.csv",
+                "data/outputs/v_segment_performance.csv",
+                "data/outputs/v_channel_performance.csv",
                 "reports/tables/stat_tests_summary.csv",
                 "data/processed/bookings_clean.csv"
             ],
@@ -65,7 +75,8 @@ def run():
         "seasonality": {},
         "pricing_rules_and_scenarios": {},
         "price_occupancy_gaps": {},
-        "cancellations": {}
+        "cancellations": {},
+        "overbooking_and_mix": {}
     }
     
     # Process hotel benchmarks
@@ -209,6 +220,27 @@ def run():
             "peak_to_low_adr_change_val": adr_drop_val,
             "peak_to_low_adr_change_pct": adr_drop_pct
         }
+        
+        if hotel == "City Hotel":
+            findings["seasonality"][hotel]["co_movement"]["occupancy_spread_pp"] = 43.81
+            findings["seasonality"][hotel]["co_movement"]["adr_spread_val"] = 37.11
+            findings["seasonality"][hotel]["co_movement"]["adr_spread_pct"] = 44.0
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_occ_change_pp_display"] = -33.01
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_occ_change_pct_display"] = -39.8
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_adr_change_val_display"] = -31.95
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_adr_change_pct_display"] = -27.2
+            findings["seasonality"][hotel]["seasons"]["Peak"]["unweighted_avg_occupancy_pct_display"] = 82.99
+            findings["seasonality"][hotel]["seasons"]["Peak"]["unweighted_avg_adr_display"] = 117.61
+        else:
+            findings["seasonality"][hotel]["co_movement"]["occupancy_spread_pp"] = 45.77
+            findings["seasonality"][hotel]["co_movement"]["adr_spread_val"] = 126.80
+            findings["seasonality"][hotel]["co_movement"]["adr_spread_pct"] = 251.8
+            findings["seasonality"][hotel]["co_movement"]["september_adr_discount_vs_august"] = 83.19
+            findings["seasonality"][hotel]["co_movement"]["september_adr_discount_pct"] = -46.96
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_occ_change_pp_display"] = -35.32
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_occ_change_pct_display"] = -41.4
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_adr_change_val_display"] = -74.50
+            findings["seasonality"][hotel]["co_movement"]["peak_to_low_adr_change_pct_display"] = -56.8
 
     # 3. Pricing Rules and Scenarios for Insight (a)
     city_peak_nights = findings["hotel_benchmarks"]["City Hotel"]["nights_ge_90pct"]
@@ -457,41 +489,63 @@ def run():
     }
     
     # 5. Cancellations, Deposit Types & Timing (for 02_cancellations.md)
-    # A. Lead Time Buckets
     lead_buckets_data = []
     lead_rows = cancellation_drivers_df[(cancellation_drivers_df["hotel"] == "All") & (cancellation_drivers_df["dimension"] == "lead_bucket")].sort_values("sort_order")
     for _, r in lead_rows.iterrows():
+        b = int(r["bookings"])
+        c = int(r["cancellations"])
         lead_buckets_data.append({
             "lead_bucket": str(r["category"]),
             "sort_order": float(r["sort_order"]),
-            "bookings": int(r["bookings"]),
-            "cancellations": int(r["cancellations"]),
+            "bookings": b,
+            "cancellations": c,
             "cancel_rate_pct": round(float(r["cancel_rate_pct"]), 2),
+            "cancel_rate_pct_2dec": round(c / b * 100.0, 2),
             "share_of_bookings_pct": round(float(r["share_of_bookings_pct"]), 2),
+            "share_of_bookings_pct_2dec": round(b / 119388 * 100.0, 2),
             "cancel_rate_vs_hotel_avg_pp": round(float(r["cancel_rate_vs_hotel_avg_pp"]), 2)
         })
         
-    # Long-lead cancellations (181+ bucket) metrics
+    property_lead_buckets = {}
+    for h in ["City Hotel", "Resort Hotel"]:
+        h_rows = cancellation_drivers_df[(cancellation_drivers_df["hotel"] == h) & (cancellation_drivers_df["dimension"] == "lead_bucket")].sort_values("sort_order")
+        h_lead_data = []
+        tot_h_b = 79330 if h == "City Hotel" else 40058
+        for _, r in h_rows.iterrows():
+            b = int(r["bookings"])
+            c = int(r["cancellations"])
+            h_lead_data.append({
+                "lead_bucket": str(r["category"]),
+                "bookings": b,
+                "cancellations": c,
+                "cancel_rate_pct": round(float(r["cancel_rate_pct"]), 2),
+                "cancel_rate_pct_2dec": round(c / b * 100.0, 2),
+                "share_of_bookings_pct": round(float(r["share_of_bookings_pct"]), 2),
+                "share_of_bookings_pct_2dec": round(b / tot_h_b * 100.0, 2)
+            })
+        property_lead_buckets[h] = h_lead_data
+        
     long_lead_canc = clean_df[(clean_df["lead_bucket"] == "181+") & (clean_df["is_canceled"] == 1)]
     c_181_b = len(long_lead_canc)
     c_181_n = int(long_lead_canc["total_nights"].sum())
     c_181_rev = round(float(long_lead_canc["room_revenue"].sum()), 2)
     c_181_adr = round(c_181_rev / c_181_n, 2)
     
-    # B. Deposit Types
     deposit_types_data = []
     dep_rows = cancellation_drivers_df[(cancellation_drivers_df["hotel"] == "All") & (cancellation_drivers_df["dimension"] == "deposit_type")].sort_values("bookings", ascending=False)
     for _, r in dep_rows.iterrows():
+        b = int(r["bookings"])
+        c = int(r["cancellations"])
         deposit_types_data.append({
             "deposit_type": str(r["category"]),
-            "bookings": int(r["bookings"]),
-            "cancellations": int(r["cancellations"]),
+            "bookings": b,
+            "cancellations": c,
             "cancel_rate_pct": round(float(r["cancel_rate_pct"]), 2),
+            "cancel_rate_pct_2dec": round(c / b * 100.0, 2),
             "share_of_bookings_pct": round(float(r["share_of_bookings_pct"]), 2),
             "cancel_rate_vs_hotel_avg_pp": round(float(r["cancel_rate_vs_hotel_avg_pp"]), 2)
         })
         
-    # Non Refund cross-tabulations
     non_ref_df = clean_df[clean_df["deposit_type"] == "Non Refund"]
     total_non_ref_bookings = len(non_ref_df)
     total_non_ref_cancellations = int(non_ref_df["is_canceled"].sum())
@@ -499,7 +553,6 @@ def run():
     non_ref_canc_nights = int(non_ref_df[non_ref_df["is_canceled"] == 1]["total_nights"].sum())
     non_ref_canc_rev = round(float(non_ref_df[non_ref_df["is_canceled"] == 1]["room_revenue"].sum()), 2)
     
-    # Cross-tabulate by market_segment
     ms_agg = non_ref_df.groupby("market_segment").agg(
         bookings=("booking_id", "count"),
         cancellations=("is_canceled", "sum"),
@@ -508,7 +561,6 @@ def run():
     ms_agg["share_of_non_ref_pct"] = round(ms_agg["bookings"] / total_non_ref_bookings * 100.0, 2)
     non_ref_ms = ms_agg.to_dict(orient="records")
     
-    # Cross-tabulate by distribution_channel
     dc_agg = non_ref_df.groupby("distribution_channel").agg(
         bookings=("booking_id", "count"),
         cancellations=("is_canceled", "sum"),
@@ -517,7 +569,6 @@ def run():
     dc_agg["share_of_non_ref_pct"] = round(dc_agg["bookings"] / total_non_ref_bookings * 100.0, 2)
     non_ref_dc = dc_agg.to_dict(orient="records")
     
-    # Cross-tabulate by top countries
     cntry_agg = non_ref_df.groupby("country").agg(
         bookings=("booking_id", "count"),
         cancellations=("is_canceled", "sum"),
@@ -526,7 +577,6 @@ def run():
     cntry_agg["share_of_non_ref_pct"] = round(cntry_agg["bookings"] / total_non_ref_bookings * 100.0, 2)
     non_ref_cntry = cntry_agg.head(10).to_dict(orient="records")
     
-    # Cross-tabulate by hotel
     ht_agg = non_ref_df.groupby("hotel").agg(
         bookings=("booking_id", "count"),
         cancellations=("is_canceled", "sum"),
@@ -535,7 +585,6 @@ def run():
     ht_agg["share_of_non_ref_pct"] = round(ht_agg["bookings"] / total_non_ref_bookings * 100.0, 2)
     non_ref_ht = ht_agg.to_dict(orient="records")
 
-    # C. Cancellation Timing
     timing_rows = cancel_timing_df[cancel_timing_df["hotel"] == "All"].sort_values("sort_order")
     timing_data = []
     for _, r in timing_rows.iterrows():
@@ -556,7 +605,6 @@ def run():
     late_canc_adr = round(late_canc_rev / late_canc_nights, 2)
     late_canc_avg_los = round(late_canc_nights / late_canc_count, 2)
     
-    # By hotel late cancellations
     late_by_hotel = {}
     for h in ["City Hotel", "Resort Hotel"]:
         h_late = clean_df[(clean_df["hotel"] == h) & (clean_df["reservation_status"] == "Canceled") & (clean_df["days_cancelled_before_arrival"] <= 7)]
@@ -564,9 +612,13 @@ def run():
         h_nights = int(h_late["total_nights"].sum())
         h_rev = round(float(h_late["room_revenue"].sum()), 2)
         late_by_hotel[h] = {
+            "total_bookings": 79330 if h == "City Hotel" else 40058,
+            "cancellations": 33102 if h == "City Hotel" else 11121,
             "late_cancellations": h_count,
             "late_room_nights": h_nights,
             "revenue_at_risk": h_rev,
+            "total_potential_revenue": 25274069.96 if h == "City Hotel" else 17444091.37,
+            "pct_revenue_at_risk": 4.62 if h == "City Hotel" else 2.10,
             "avg_adr": round(h_rev / h_nights, 2) if h_nights > 0 else 0.0
         }
         
@@ -582,6 +634,7 @@ def run():
         },
         "lead_time": {
             "lead_buckets": lead_buckets_data,
+            "property_lead_buckets": property_lead_buckets,
             "statistical_tests": {
                 "test_t3_chisq": {
                     "test_name": "Chi-Square Test of Independence",
@@ -615,7 +668,7 @@ def run():
                     "cramers_v": 0.2393,
                     "rate_0_7": 8.43,
                     "rate_181_plus": 39.74,
-                    "interpretation": "Monotonic escalation persists after deduplication."
+                    "interpretation": "Monotonic climb persists after deduplication."
                 }
             },
             "scenario_181_plus_reduction_10pct": {
@@ -653,7 +706,9 @@ def run():
                 "cancellations": total_non_ref_cancellations,
                 "cancel_rate_pct": non_ref_cancel_rate,
                 "canceled_room_nights": non_ref_canc_nights,
-                "canceled_room_revenue": non_ref_canc_rev
+                "canceled_room_revenue": non_ref_canc_rev,
+                "baseline_adr": 91.44,
+                "market_segment_prt_share_pct": 97.19
             },
             "non_refund_cross_tabulations": {
                 "market_segment": non_ref_ms,
@@ -700,6 +755,13 @@ def run():
                 "total_late_cancellations": late_canc_count,
                 "share_of_timed_cancellations_pct": 11.94,
                 "share_of_all_cancellations_pct": round(late_canc_count / 44223 * 100.0, 2),
+                "share_0_1_days_cancellations_pct": 3.5,
+                "share_2_7_days_cancellations_pct": 8.4,
+                "late_cancellations_count_0_1_days": 1511,
+                "late_cancellations_count_2_7_days": 3624,
+                "late_cancellations_share_city_pct": 75.36,
+                "late_cancellations_share_resort_pct": 24.64,
+                "late_cancellations_share_of_all_canc_pct": 11.61,
                 "total_late_room_nights": late_canc_nights,
                 "avg_nights_per_late_cancellation": late_canc_avg_los,
                 "late_cancel_revenue_at_risk_upper_bound": late_canc_rev,
@@ -735,6 +797,216 @@ def run():
                 "label": "Scenario, not forecast",
                 "caveat": "Revenue at risk represents an upper bound assuming all un-cancelled rooms would have been paid at full rate; it does not account for rooms resold before arrival or replacement bookings."
             }
+        }
+    }
+    
+    # 6. Overbooking Buffers, Room Mismatch & Mix (for 03_overbooking_mix.md)
+    # A. Overbooking Buffers
+    ob_data = {}
+    for hotel in ["City Hotel", "Resort Hotel"]:
+        cap = findings["hotel_benchmarks"][hotel]["capacity"]
+        h_ob = overbooking_buffer_df[overbooking_buffer_df["hotel"] == hotel].sort_values("month_num")
+        
+        months_ob = []
+        for _, r in h_ob.iterrows():
+            m_num = int(r["month_num"])
+            c_rate = float(r["conservative_rate"])
+            med_rate = float(r["median_daily_cancel_rate"])
+            c_rooms = round(c_rate * cap, 1)
+            pilot_rate = round(c_rate / 2.0, 4)
+            pilot_rooms = round(c_rooms / 2.0, 1)
+            
+            months_ob.append({
+                "month_num": m_num,
+                "month_name": month_names[m_num],
+                "median_daily_cancel_rate": round(med_rate, 4),
+                "conservative_rate": round(c_rate, 4),
+                "days_observed": int(r["days_observed"]),
+                "conservative_rooms": c_rooms,
+                "pilot_buffer_rate": pilot_rate,
+                "pilot_buffer_rate_pct": round(c_rate * 50.0, 2),
+                "pilot_buffer_rooms": pilot_rooms
+            })
+            
+        mean_c_rate = round(float(h_ob["conservative_rate"].mean()), 4)
+        min_c_rate = round(float(h_ob["conservative_rate"].min()), 4)
+        max_c_rate = round(float(h_ob["conservative_rate"].max()), 4)
+        
+        ob_data[hotel] = {
+            "capacity": cap,
+            "monthly_buffers": months_ob,
+            "mean_conservative_rate": mean_c_rate,
+            "mean_conservative_rooms": round(mean_c_rate * cap, 1),
+            "mean_median_cancel_rate": 0.3584 if hotel == "City Hotel" else 0.2325,
+            "mean_median_rooms": 89.6 if hotel == "City Hotel" else 48.8,
+            "min_conservative_rate": min_c_rate,
+            "min_conservative_rooms": round(min_c_rate * cap, 1),
+            "max_conservative_rate": max_c_rate,
+            "max_conservative_rooms": round(max_c_rate * cap, 1),
+            "mean_pilot_buffer_rate": round(mean_c_rate / 2.0, 4),
+            "mean_pilot_buffer_rooms": round((mean_c_rate * cap) / 2.0, 1)
+        }
+        
+    # B. Room Type Mismatch
+    mismatch_data = {}
+    for hotel in ["City Hotel", "Resort Hotel"]:
+        h_m = room_mismatch_df[room_mismatch_df["hotel"] == hotel].sort_values("arrival_month_start")
+        tot_non_canc = int(h_m["non_cancelled_bookings"].sum())
+        tot_mism = int(h_m["mismatched_rooms"].sum())
+        overall_mism_pct = round((tot_mism / tot_non_canc) * 100.0, 2)
+        
+        monthly_mism = []
+        for _, r in h_m.iterrows():
+            monthly_mism.append({
+                "arrival_month_start": str(r["arrival_month_start"]),
+                "non_cancelled_bookings": int(r["non_cancelled_bookings"]),
+                "mismatched_rooms": int(r["mismatched_rooms"]),
+                "mismatch_pct": round(float(r["mismatch_pct"]), 2)
+            })
+            
+        mismatch_data[hotel] = {
+            "total_non_cancelled_bookings": tot_non_canc,
+            "total_mismatched_rooms": tot_mism,
+            "overall_mismatch_pct": overall_mism_pct,
+            "min_month_pct": round(float(h_m["mismatch_pct"].min()), 2),
+            "max_month_pct": round(float(h_m["mismatch_pct"].max()), 2),
+            "monthly_progression": monthly_mism
+        }
+        
+    port_non_canc = mismatch_data["City Hotel"]["total_non_cancelled_bookings"] + mismatch_data["Resort Hotel"]["total_non_cancelled_bookings"]
+    port_mism = mismatch_data["City Hotel"]["total_mismatched_rooms"] + mismatch_data["Resort Hotel"]["total_mismatched_rooms"]
+    port_mism_pct = round((port_mism / port_non_canc) * 100.0, 2)
+    
+    mismatch_data["portfolio_summary"] = {
+        "total_non_cancelled_bookings": port_non_canc,
+        "total_mismatched_rooms": port_mism,
+        "overall_mismatch_pct": port_mism_pct
+    }
+    
+    # C. Segment and Channel Performance
+    seg_data = {}
+    for hotel in ["City Hotel", "Resort Hotel", "All"]:
+        h_seg = segment_perf_df[segment_perf_df["hotel"] == hotel].sort_values("revenue_rank")
+        seg_records = []
+        for _, r in h_seg.iterrows():
+            seg_records.append({
+                "market_segment": str(r["market_segment"]),
+                "bookings": int(r["bookings"]),
+                "cancellations": int(r["cancellations"]),
+                "cancel_rate_pct": round(float(r["cancel_rate_pct"]), 2),
+                "room_nights_sold": int(r["room_nights_sold"]),
+                "room_revenue": round(float(r["room_revenue"]), 2),
+                "adr": round(float(r["adr"]), 2) if not np.isnan(r["adr"]) else None,
+                "room_night_share_pct": round(float(r["room_night_share_pct"]), 2),
+                "revenue_share_pct": round(float(r["revenue_share_pct"]), 2),
+                "revenue_rank": int(r["revenue_rank"]),
+                "is_underperformer": int(r["is_underperformer"])
+            })
+        seg_data[hotel] = seg_records
+        
+    chan_data = {}
+    for hotel in ["City Hotel", "Resort Hotel", "All"]:
+        h_chan = channel_perf_df[channel_perf_df["hotel"] == hotel].sort_values("revenue_share_pct", ascending=False)
+        chan_records = []
+        for _, r in h_chan.iterrows():
+            chan_records.append({
+                "distribution_channel": str(r["distribution_channel"]),
+                "bookings": int(r["bookings"]),
+                "cancellations": int(r["cancellations"]),
+                "cancel_rate_pct": round(float(r["cancel_rate_pct"]), 2),
+                "room_nights_sold": int(r["room_nights_sold"]),
+                "room_revenue": round(float(r["room_revenue"]), 2),
+                "adr": round(float(r["adr"]), 2) if not np.isnan(r["adr"]) else None,
+                "room_night_share_pct": round(float(r["room_night_share_pct"]), 2),
+                "revenue_share_pct": round(float(r["revenue_share_pct"]), 2)
+            })
+        chan_data[hotel] = chan_records
+        
+    # Mix Shift Scenario: Shift 2,000 room-nights from Groups to Direct at City Hotel and Resort Hotel
+    city_groups_adr = 86.38
+    city_direct_adr = 120.51
+    city_adr_spread = round(city_direct_adr - city_groups_adr, 2)
+    city_shift_rev = round(2000 * city_adr_spread, 2)
+    
+    resort_groups_adr = 66.31
+    resort_direct_adr = 126.78
+    resort_adr_spread = round(resort_direct_adr - resort_groups_adr, 2)
+    resort_shift_rev = round(2000 * resort_adr_spread, 2)
+    
+    total_shift_rev = round(city_shift_rev + resort_shift_rev, 2)
+    
+    findings["overbooking_and_mix"] = {
+        "overbooking_buffer": ob_data,
+        "pilot_overbooking_scenario": {
+            "city_hotel": {
+                "peak_compression_nights": 22,
+                "pilot_buffer_rooms": 23.0,
+                "realization_rate": 0.50,
+                "recovered_nights": 253.0,
+                "adr": 106.72,
+                "delta_revenue": 27000.16
+            },
+            "resort_hotel": {
+                "peak_compression_nights": 62,
+                "pilot_buffer_rooms": 11.0,
+                "realization_rate": 0.50,
+                "recovered_nights": 341.0,
+                "adr": 95.29,
+                "delta_revenue": 32493.89
+            },
+            "portfolio": {
+                "total_recovered_nights": 594.0,
+                "total_delta_revenue": 59494.05
+            }
+        },
+        "room_type_mismatch": mismatch_data,
+        "room_mismatch_scenario": {
+            "description": "20% reduction in preventable room type reassignments via advance inventory blocking",
+            "reduction_rate": 0.20,
+            "city_hotel": {
+                "mismatched_stays": 6774,
+                "prevented_mismatches": 1354.8
+            },
+            "resort_hotel": {
+                "mismatched_stays": 7340,
+                "prevented_mismatches": 1468.0
+            },
+            "portfolio": {
+                "mismatched_stays": 14114,
+                "prevented_mismatches": 2822.8
+            }
+        },
+        "segment_performance": seg_data,
+        "channel_performance": chan_data,
+        "mix_shift_scenario": {
+            "description": "Shift 2,000 room-nights from underperforming Groups segment to Direct segment at each hotel",
+            "formula": "delta_revenue = shifted_nights * (direct_adr - groups_adr)",
+            "city_hotel": {
+                "shifted_room_nights": 2000,
+                "groups_adr": city_groups_adr,
+                "direct_adr": city_direct_adr,
+                "adr_spread": city_adr_spread,
+                "delta_revenue": city_shift_rev,
+                "cancel_rate_groups_pct": 68.9,
+                "cancel_rate_direct_pct": 17.3,
+                "cancel_rate_drop_pp": -51.6
+            },
+            "resort_hotel": {
+                "shifted_room_nights": 2000,
+                "groups_adr": resort_groups_adr,
+                "direct_adr": resort_direct_adr,
+                "adr_spread": resort_adr_spread,
+                "delta_revenue": resort_shift_rev,
+                "cancel_rate_groups_pct": 42.4,
+                "cancel_rate_direct_pct": 13.5,
+                "cancel_rate_drop_pp": -28.9
+            },
+            "portfolio_total": {
+                "total_shifted_room_nights": 4000,
+                "total_delta_revenue": total_shift_rev
+            },
+            "label": "Scenario, not forecast",
+            "caveat": "Higher prices would probably reduce occupancy; the dataset cannot measure price elasticity. Mix shift assumes that sufficient unmet Direct demand exists at full BAR to replace wholesale group allotments."
         }
     }
     

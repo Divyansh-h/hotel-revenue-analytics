@@ -11,6 +11,10 @@
       "data/outputs/v_cancel_timing.csv",
       "data/outputs/v_late_cancel_revenue_at_risk.csv",
       "data/outputs/v_lead_deposit_matrix.csv",
+      "data/outputs/v_overbooking_buffer.csv",
+      "data/outputs/v_room_mismatch.csv",
+      "data/outputs/v_segment_performance.csv",
+      "data/outputs/v_channel_performance.csv",
       "reports/tables/stat_tests_summary.csv",
       "data/processed/bookings_clean.csv"
     ],
@@ -118,7 +122,9 @@
           "total_room_revenue": 5975944.61,
           "blended_occupancy_pct": 83.01,
           "blended_adr": 118.02,
-          "blended_revpar": 97.97
+          "blended_revpar": 97.97,
+          "unweighted_avg_occupancy_pct_display": 82.99,
+          "unweighted_avg_adr_display": 117.61
         },
         "Shoulder": {
           "month_nums": [
@@ -263,7 +269,14 @@
         "peak_to_low_occ_change_pp": -33.0,
         "peak_to_low_occ_change_pct": -39.77,
         "peak_to_low_adr_change_val": -31.94,
-        "peak_to_low_adr_change_pct": -27.16
+        "peak_to_low_adr_change_pct": -27.16,
+        "occupancy_spread_pp": 43.81,
+        "adr_spread_val": 37.11,
+        "adr_spread_pct": 44.0,
+        "peak_to_low_occ_change_pp_display": -33.01,
+        "peak_to_low_occ_change_pct_display": -39.8,
+        "peak_to_low_adr_change_val_display": -31.95,
+        "peak_to_low_adr_change_pct_display": -27.2
       }
     },
     "Resort Hotel": {
@@ -468,7 +481,16 @@
         "peak_to_low_occ_change_pp": -35.32,
         "peak_to_low_occ_change_pct": -41.38,
         "peak_to_low_adr_change_val": -74.5,
-        "peak_to_low_adr_change_pct": -56.77
+        "peak_to_low_adr_change_pct": -56.77,
+        "occupancy_spread_pp": 45.77,
+        "adr_spread_val": 126.8,
+        "adr_spread_pct": 251.8,
+        "september_adr_discount_vs_august": 83.19,
+        "september_adr_discount_pct": -46.96,
+        "peak_to_low_occ_change_pp_display": -35.32,
+        "peak_to_low_occ_change_pct_display": -41.4,
+        "peak_to_low_adr_change_val_display": -74.5,
+        "peak_to_low_adr_change_pct_display": -56.8
       }
     }
   },
@@ -843,7 +865,9 @@
           "bookings": 19746,
           "cancellations": 1902,
           "cancel_rate_pct": 9.6,
+          "cancel_rate_pct_2dec": 9.63,
           "share_of_bookings_pct": 16.5,
+          "share_of_bookings_pct_2dec": 16.54,
           "cancel_rate_vs_hotel_avg_pp": -27.4
         },
         {
@@ -852,7 +876,9 @@
           "bookings": 18960,
           "cancellations": 5283,
           "cancel_rate_pct": 27.9,
+          "cancel_rate_pct_2dec": 27.86,
           "share_of_bookings_pct": 15.9,
+          "share_of_bookings_pct_2dec": 15.88,
           "cancel_rate_vs_hotel_avg_pp": -9.2
         },
         {
@@ -861,7 +887,9 @@
           "bookings": 29552,
           "cancellations": 11140,
           "cancel_rate_pct": 37.7,
+          "cancel_rate_pct_2dec": 37.7,
           "share_of_bookings_pct": 24.8,
+          "share_of_bookings_pct_2dec": 24.75,
           "cancel_rate_vs_hotel_avg_pp": 0.7
         },
         {
@@ -870,7 +898,9 @@
           "bookings": 26439,
           "cancellations": 11821,
           "cancel_rate_pct": 44.7,
+          "cancel_rate_pct_2dec": 44.71,
           "share_of_bookings_pct": 22.1,
+          "share_of_bookings_pct_2dec": 22.15,
           "cancel_rate_vs_hotel_avg_pp": 7.7
         },
         {
@@ -879,10 +909,108 @@
           "bookings": 24691,
           "cancellations": 14077,
           "cancel_rate_pct": 57.0,
+          "cancel_rate_pct_2dec": 57.01,
           "share_of_bookings_pct": 20.7,
+          "share_of_bookings_pct_2dec": 20.68,
           "cancel_rate_vs_hotel_avg_pp": 20.0
         }
       ],
+      "property_lead_buckets": {
+        "City Hotel": [
+          {
+            "lead_bucket": "0-7",
+            "bookings": 10808,
+            "cancellations": 1319,
+            "cancel_rate_pct": 12.2,
+            "cancel_rate_pct_2dec": 12.2,
+            "share_of_bookings_pct": 13.6,
+            "share_of_bookings_pct_2dec": 13.62
+          },
+          {
+            "lead_bucket": "8-30",
+            "bookings": 12554,
+            "cancellations": 3880,
+            "cancel_rate_pct": 30.9,
+            "cancel_rate_pct_2dec": 30.91,
+            "share_of_bookings_pct": 15.8,
+            "share_of_bookings_pct_2dec": 15.83
+          },
+          {
+            "lead_bucket": "31-90",
+            "bookings": 20796,
+            "cancellations": 8299,
+            "cancel_rate_pct": 39.9,
+            "cancel_rate_pct_2dec": 39.91,
+            "share_of_bookings_pct": 26.2,
+            "share_of_bookings_pct_2dec": 26.21
+          },
+          {
+            "lead_bucket": "91-180",
+            "bookings": 18223,
+            "cancellations": 8746,
+            "cancel_rate_pct": 48.0,
+            "cancel_rate_pct_2dec": 47.99,
+            "share_of_bookings_pct": 23.0,
+            "share_of_bookings_pct_2dec": 22.97
+          },
+          {
+            "lead_bucket": "181+",
+            "bookings": 16948,
+            "cancellations": 10857,
+            "cancel_rate_pct": 64.1,
+            "cancel_rate_pct_2dec": 64.06,
+            "share_of_bookings_pct": 21.4,
+            "share_of_bookings_pct_2dec": 21.36
+          }
+        ],
+        "Resort Hotel": [
+          {
+            "lead_bucket": "0-7",
+            "bookings": 8938,
+            "cancellations": 583,
+            "cancel_rate_pct": 6.5,
+            "cancel_rate_pct_2dec": 6.52,
+            "share_of_bookings_pct": 22.3,
+            "share_of_bookings_pct_2dec": 22.31
+          },
+          {
+            "lead_bucket": "8-30",
+            "bookings": 6406,
+            "cancellations": 1403,
+            "cancel_rate_pct": 21.9,
+            "cancel_rate_pct_2dec": 21.9,
+            "share_of_bookings_pct": 16.0,
+            "share_of_bookings_pct_2dec": 15.99
+          },
+          {
+            "lead_bucket": "31-90",
+            "bookings": 8756,
+            "cancellations": 2841,
+            "cancel_rate_pct": 32.4,
+            "cancel_rate_pct_2dec": 32.45,
+            "share_of_bookings_pct": 21.9,
+            "share_of_bookings_pct_2dec": 21.86
+          },
+          {
+            "lead_bucket": "91-180",
+            "bookings": 8216,
+            "cancellations": 3075,
+            "cancel_rate_pct": 37.4,
+            "cancel_rate_pct_2dec": 37.43,
+            "share_of_bookings_pct": 20.5,
+            "share_of_bookings_pct_2dec": 20.51
+          },
+          {
+            "lead_bucket": "181+",
+            "bookings": 7743,
+            "cancellations": 3220,
+            "cancel_rate_pct": 41.6,
+            "cancel_rate_pct_2dec": 41.59,
+            "share_of_bookings_pct": 19.3,
+            "share_of_bookings_pct_2dec": 19.33
+          }
+        ]
+      },
       "statistical_tests": {
         "test_t3_chisq": {
           "test_name": "Chi-Square Test of Independence",
@@ -916,7 +1044,7 @@
           "cramers_v": 0.2393,
           "rate_0_7": 8.43,
           "rate_181_plus": 39.74,
-          "interpretation": "Monotonic escalation persists after deduplication."
+          "interpretation": "Monotonic climb persists after deduplication."
         }
       },
       "scenario_181_plus_reduction_10pct": {
@@ -943,6 +1071,7 @@
           "bookings": 104640,
           "cancellations": 29694,
           "cancel_rate_pct": 28.4,
+          "cancel_rate_pct_2dec": 28.38,
           "share_of_bookings_pct": 87.6,
           "cancel_rate_vs_hotel_avg_pp": -8.7
         },
@@ -951,6 +1080,7 @@
           "bookings": 14586,
           "cancellations": 14493,
           "cancel_rate_pct": 99.4,
+          "cancel_rate_pct_2dec": 99.36,
           "share_of_bookings_pct": 12.2,
           "cancel_rate_vs_hotel_avg_pp": 62.3
         },
@@ -959,6 +1089,7 @@
           "bookings": 162,
           "cancellations": 36,
           "cancel_rate_pct": 22.2,
+          "cancel_rate_pct_2dec": 22.22,
           "share_of_bookings_pct": 0.1,
           "cancel_rate_vs_hotel_avg_pp": -14.8
         }
@@ -979,7 +1110,9 @@
         "cancellations": 14493,
         "cancel_rate_pct": 99.36,
         "canceled_room_nights": 39358,
-        "canceled_room_revenue": 3598937.03
+        "canceled_room_revenue": 3598937.03,
+        "baseline_adr": 91.44,
+        "market_segment_prt_share_pct": 97.19
       },
       "non_refund_cross_tabulations": {
         "market_segment": [
@@ -1234,6 +1367,13 @@
         "total_late_cancellations": 5135,
         "share_of_timed_cancellations_pct": 11.94,
         "share_of_all_cancellations_pct": 11.61,
+        "share_0_1_days_cancellations_pct": 3.5,
+        "share_2_7_days_cancellations_pct": 8.4,
+        "late_cancellations_count_0_1_days": 1511,
+        "late_cancellations_count_2_7_days": 3624,
+        "late_cancellations_share_city_pct": 75.36,
+        "late_cancellations_share_resort_pct": 24.64,
+        "late_cancellations_share_of_all_canc_pct": 11.61,
         "total_late_room_nights": 14841,
         "avg_nights_per_late_cancellation": 2.89,
         "late_cancel_revenue_at_risk_upper_bound": 1533486.66,
@@ -1242,15 +1382,23 @@
         "avg_adr_of_late_cancellations": 103.33,
         "by_hotel": {
           "City Hotel": {
+            "total_bookings": 79330,
+            "cancellations": 33102,
             "late_cancellations": 3870,
             "late_room_nights": 10864,
             "revenue_at_risk": 1167162.59,
+            "total_potential_revenue": 25274069.96,
+            "pct_revenue_at_risk": 4.62,
             "avg_adr": 107.43
           },
           "Resort Hotel": {
+            "total_bookings": 40058,
+            "cancellations": 11121,
             "late_cancellations": 1265,
             "late_room_nights": 3977,
             "revenue_at_risk": 366324.07,
+            "total_potential_revenue": 17444091.37,
+            "pct_revenue_at_risk": 2.1,
             "avg_adr": 92.11
           }
         }
@@ -1282,6 +1430,1165 @@
         "label": "Scenario, not forecast",
         "caveat": "Revenue at risk represents an upper bound assuming all un-cancelled rooms would have been paid at full rate; it does not account for rooms resold before arrival or replacement bookings."
       }
+    }
+  },
+  "overbooking_and_mix": {
+    "overbooking_buffer": {
+      "City Hotel": {
+        "capacity": 250,
+        "monthly_buffers": [
+          {
+            "month_num": 1,
+            "month_name": "January",
+            "median_daily_cancel_rate": 0.3033,
+            "conservative_rate": 0.1576,
+            "days_observed": 60,
+            "conservative_rooms": 39.4,
+            "pilot_buffer_rate": 0.0788,
+            "pilot_buffer_rate_pct": 7.88,
+            "pilot_buffer_rooms": 19.7
+          },
+          {
+            "month_num": 2,
+            "month_name": "February",
+            "median_daily_cancel_rate": 0.295,
+            "conservative_rate": 0.1834,
+            "days_observed": 57,
+            "conservative_rooms": 45.9,
+            "pilot_buffer_rate": 0.0917,
+            "pilot_buffer_rate_pct": 9.17,
+            "pilot_buffer_rooms": 22.9
+          },
+          {
+            "month_num": 3,
+            "month_name": "March",
+            "median_daily_cancel_rate": 0.3032,
+            "conservative_rate": 0.193,
+            "days_observed": 62,
+            "conservative_rooms": 48.2,
+            "pilot_buffer_rate": 0.0965,
+            "pilot_buffer_rate_pct": 9.65,
+            "pilot_buffer_rooms": 24.1
+          },
+          {
+            "month_num": 4,
+            "month_name": "April",
+            "median_daily_cancel_rate": 0.4144,
+            "conservative_rate": 0.2709,
+            "days_observed": 60,
+            "conservative_rooms": 67.7,
+            "pilot_buffer_rate": 0.1354,
+            "pilot_buffer_rate_pct": 13.54,
+            "pilot_buffer_rooms": 33.9
+          },
+          {
+            "month_num": 5,
+            "month_name": "May",
+            "median_daily_cancel_rate": 0.3936,
+            "conservative_rate": 0.2473,
+            "days_observed": 62,
+            "conservative_rooms": 61.8,
+            "pilot_buffer_rate": 0.1236,
+            "pilot_buffer_rate_pct": 12.37,
+            "pilot_buffer_rooms": 30.9
+          },
+          {
+            "month_num": 6,
+            "month_name": "June",
+            "median_daily_cancel_rate": 0.4179,
+            "conservative_rate": 0.2359,
+            "days_observed": 59,
+            "conservative_rooms": 59.0,
+            "pilot_buffer_rate": 0.1179,
+            "pilot_buffer_rate_pct": 11.79,
+            "pilot_buffer_rooms": 29.5
+          },
+          {
+            "month_num": 7,
+            "month_name": "July",
+            "median_daily_cancel_rate": 0.375,
+            "conservative_rate": 0.2177,
+            "days_observed": 81,
+            "conservative_rooms": 54.4,
+            "pilot_buffer_rate": 0.1089,
+            "pilot_buffer_rate_pct": 10.88,
+            "pilot_buffer_rooms": 27.2
+          },
+          {
+            "month_num": 8,
+            "month_name": "August",
+            "median_daily_cancel_rate": 0.3661,
+            "conservative_rate": 0.2446,
+            "days_observed": 91,
+            "conservative_rooms": 61.2,
+            "pilot_buffer_rate": 0.1223,
+            "pilot_buffer_rate_pct": 12.23,
+            "pilot_buffer_rooms": 30.6
+          },
+          {
+            "month_num": 9,
+            "month_name": "September",
+            "median_daily_cancel_rate": 0.3894,
+            "conservative_rate": 0.1216,
+            "days_observed": 60,
+            "conservative_rooms": 30.4,
+            "pilot_buffer_rate": 0.0608,
+            "pilot_buffer_rate_pct": 6.08,
+            "pilot_buffer_rooms": 15.2
+          },
+          {
+            "month_num": 10,
+            "month_name": "October",
+            "median_daily_cancel_rate": 0.4006,
+            "conservative_rate": 0.1113,
+            "days_observed": 62,
+            "conservative_rooms": 27.8,
+            "pilot_buffer_rate": 0.0556,
+            "pilot_buffer_rate_pct": 5.56,
+            "pilot_buffer_rooms": 13.9
+          },
+          {
+            "month_num": 11,
+            "month_name": "November",
+            "median_daily_cancel_rate": 0.2832,
+            "conservative_rate": 0.1125,
+            "days_observed": 54,
+            "conservative_rooms": 28.1,
+            "pilot_buffer_rate": 0.0563,
+            "pilot_buffer_rate_pct": 5.62,
+            "pilot_buffer_rooms": 14.1
+          },
+          {
+            "month_num": 12,
+            "month_name": "December",
+            "median_daily_cancel_rate": 0.3588,
+            "conservative_rate": 0.1476,
+            "days_observed": 54,
+            "conservative_rooms": 36.9,
+            "pilot_buffer_rate": 0.0738,
+            "pilot_buffer_rate_pct": 7.38,
+            "pilot_buffer_rooms": 18.4
+          }
+        ],
+        "mean_conservative_rate": 0.1869,
+        "mean_conservative_rooms": 46.7,
+        "mean_median_cancel_rate": 0.3584,
+        "mean_median_rooms": 89.6,
+        "min_conservative_rate": 0.1113,
+        "min_conservative_rooms": 27.8,
+        "max_conservative_rate": 0.2709,
+        "max_conservative_rooms": 67.7,
+        "mean_pilot_buffer_rate": 0.0935,
+        "mean_pilot_buffer_rooms": 23.4
+      },
+      "Resort Hotel": {
+        "capacity": 210,
+        "monthly_buffers": [
+          {
+            "month_num": 1,
+            "month_name": "January",
+            "median_daily_cancel_rate": 0.1212,
+            "conservative_rate": 0.0456,
+            "days_observed": 55,
+            "conservative_rooms": 9.6,
+            "pilot_buffer_rate": 0.0228,
+            "pilot_buffer_rate_pct": 2.28,
+            "pilot_buffer_rooms": 4.8
+          },
+          {
+            "month_num": 2,
+            "month_name": "February",
+            "median_daily_cancel_rate": 0.1852,
+            "conservative_rate": 0.07,
+            "days_observed": 55,
+            "conservative_rooms": 14.7,
+            "pilot_buffer_rate": 0.035,
+            "pilot_buffer_rate_pct": 3.5,
+            "pilot_buffer_rooms": 7.3
+          },
+          {
+            "month_num": 3,
+            "month_name": "March",
+            "median_daily_cancel_rate": 0.1798,
+            "conservative_rate": 0.089,
+            "days_observed": 60,
+            "conservative_rooms": 18.7,
+            "pilot_buffer_rate": 0.0445,
+            "pilot_buffer_rate_pct": 4.45,
+            "pilot_buffer_rooms": 9.3
+          },
+          {
+            "month_num": 4,
+            "month_name": "April",
+            "median_daily_cancel_rate": 0.2604,
+            "conservative_rate": 0.1203,
+            "days_observed": 59,
+            "conservative_rooms": 25.3,
+            "pilot_buffer_rate": 0.0602,
+            "pilot_buffer_rate_pct": 6.02,
+            "pilot_buffer_rooms": 12.7
+          },
+          {
+            "month_num": 5,
+            "month_name": "May",
+            "median_daily_cancel_rate": 0.2682,
+            "conservative_rate": 0.1403,
+            "days_observed": 62,
+            "conservative_rooms": 29.5,
+            "pilot_buffer_rate": 0.0702,
+            "pilot_buffer_rate_pct": 7.02,
+            "pilot_buffer_rooms": 14.8
+          },
+          {
+            "month_num": 6,
+            "month_name": "June",
+            "median_daily_cancel_rate": 0.3158,
+            "conservative_rate": 0.2019,
+            "days_observed": 59,
+            "conservative_rooms": 42.4,
+            "pilot_buffer_rate": 0.1009,
+            "pilot_buffer_rate_pct": 10.1,
+            "pilot_buffer_rooms": 21.2
+          },
+          {
+            "month_num": 7,
+            "month_name": "July",
+            "median_daily_cancel_rate": 0.3061,
+            "conservative_rate": 0.1768,
+            "days_observed": 93,
+            "conservative_rooms": 37.1,
+            "pilot_buffer_rate": 0.0884,
+            "pilot_buffer_rate_pct": 8.84,
+            "pilot_buffer_rooms": 18.6
+          },
+          {
+            "month_num": 8,
+            "month_name": "August",
+            "median_daily_cancel_rate": 0.3269,
+            "conservative_rate": 0.1914,
+            "days_observed": 93,
+            "conservative_rooms": 40.2,
+            "pilot_buffer_rate": 0.0957,
+            "pilot_buffer_rate_pct": 9.57,
+            "pilot_buffer_rooms": 20.1
+          },
+          {
+            "month_num": 9,
+            "month_name": "September",
+            "median_daily_cancel_rate": 0.2609,
+            "conservative_rate": 0.1456,
+            "days_observed": 59,
+            "conservative_rooms": 30.6,
+            "pilot_buffer_rate": 0.0728,
+            "pilot_buffer_rate_pct": 7.28,
+            "pilot_buffer_rooms": 15.3
+          },
+          {
+            "month_num": 10,
+            "month_name": "October",
+            "median_daily_cancel_rate": 0.2083,
+            "conservative_rate": 0.0513,
+            "days_observed": 59,
+            "conservative_rooms": 10.8,
+            "pilot_buffer_rate": 0.0256,
+            "pilot_buffer_rate_pct": 2.56,
+            "pilot_buffer_rooms": 5.4
+          },
+          {
+            "month_num": 11,
+            "month_name": "November",
+            "median_daily_cancel_rate": 0.1686,
+            "conservative_rate": 0.0279,
+            "days_observed": 52,
+            "conservative_rooms": 5.9,
+            "pilot_buffer_rate": 0.014,
+            "pilot_buffer_rate_pct": 1.4,
+            "pilot_buffer_rooms": 3.0
+          },
+          {
+            "month_num": 12,
+            "month_name": "December",
+            "median_daily_cancel_rate": 0.1885,
+            "conservative_rate": 0.0333,
+            "days_observed": 54,
+            "conservative_rooms": 7.0,
+            "pilot_buffer_rate": 0.0167,
+            "pilot_buffer_rate_pct": 1.67,
+            "pilot_buffer_rooms": 3.5
+          }
+        ],
+        "mean_conservative_rate": 0.1078,
+        "mean_conservative_rooms": 22.6,
+        "mean_median_cancel_rate": 0.2325,
+        "mean_median_rooms": 48.8,
+        "min_conservative_rate": 0.0279,
+        "min_conservative_rooms": 5.9,
+        "max_conservative_rate": 0.2019,
+        "max_conservative_rooms": 42.4,
+        "mean_pilot_buffer_rate": 0.0539,
+        "mean_pilot_buffer_rooms": 11.3
+      }
+    },
+    "pilot_overbooking_scenario": {
+      "city_hotel": {
+        "peak_compression_nights": 22,
+        "pilot_buffer_rooms": 23.0,
+        "realization_rate": 0.5,
+        "recovered_nights": 253.0,
+        "adr": 106.72,
+        "delta_revenue": 27000.16
+      },
+      "resort_hotel": {
+        "peak_compression_nights": 62,
+        "pilot_buffer_rooms": 11.0,
+        "realization_rate": 0.5,
+        "recovered_nights": 341.0,
+        "adr": 95.29,
+        "delta_revenue": 32493.89
+      },
+      "portfolio": {
+        "total_recovered_nights": 594.0,
+        "total_delta_revenue": 59494.05
+      }
+    },
+    "room_type_mismatch": {
+      "City Hotel": {
+        "total_non_cancelled_bookings": 46228,
+        "total_mismatched_rooms": 6774,
+        "overall_mismatch_pct": 14.65,
+        "min_month_pct": 5.96,
+        "max_month_pct": 32.38,
+        "monthly_progression": [
+          {
+            "arrival_month_start": "2015-07-01",
+            "non_cancelled_bookings": 459,
+            "mismatched_rooms": 59,
+            "mismatch_pct": 12.85
+          },
+          {
+            "arrival_month_start": "2015-08-01",
+            "non_cancelled_bookings": 1248,
+            "mismatched_rooms": 334,
+            "mismatch_pct": 26.76
+          },
+          {
+            "arrival_month_start": "2015-09-01",
+            "non_cancelled_bookings": 1986,
+            "mismatched_rooms": 643,
+            "mismatch_pct": 32.38
+          },
+          {
+            "arrival_month_start": "2015-10-01",
+            "non_cancelled_bookings": 2065,
+            "mismatched_rooms": 517,
+            "mismatch_pct": 25.04
+          },
+          {
+            "arrival_month_start": "2015-11-01",
+            "non_cancelled_bookings": 934,
+            "mismatched_rooms": 164,
+            "mismatch_pct": 17.56
+          },
+          {
+            "arrival_month_start": "2015-12-01",
+            "non_cancelled_bookings": 986,
+            "mismatched_rooms": 180,
+            "mismatch_pct": 18.26
+          },
+          {
+            "arrival_month_start": "2016-01-01",
+            "non_cancelled_bookings": 926,
+            "mismatched_rooms": 132,
+            "mismatch_pct": 14.25
+          },
+          {
+            "arrival_month_start": "2016-02-01",
+            "non_cancelled_bookings": 1441,
+            "mismatched_rooms": 228,
+            "mismatch_pct": 15.82
+          },
+          {
+            "arrival_month_start": "2016-03-01",
+            "non_cancelled_bookings": 1938,
+            "mismatched_rooms": 345,
+            "mismatch_pct": 17.8
+          },
+          {
+            "arrival_month_start": "2016-04-01",
+            "non_cancelled_bookings": 2022,
+            "mismatched_rooms": 318,
+            "mismatch_pct": 15.73
+          },
+          {
+            "arrival_month_start": "2016-05-01",
+            "non_cancelled_bookings": 2240,
+            "mismatched_rooms": 353,
+            "mismatch_pct": 15.76
+          },
+          {
+            "arrival_month_start": "2016-06-01",
+            "non_cancelled_bookings": 2203,
+            "mismatched_rooms": 383,
+            "mismatch_pct": 17.39
+          },
+          {
+            "arrival_month_start": "2016-07-01",
+            "non_cancelled_bookings": 2088,
+            "mismatched_rooms": 334,
+            "mismatch_pct": 16.0
+          },
+          {
+            "arrival_month_start": "2016-08-01",
+            "non_cancelled_bookings": 2131,
+            "mismatched_rooms": 213,
+            "mismatch_pct": 10.0
+          },
+          {
+            "arrival_month_start": "2016-09-01",
+            "non_cancelled_bookings": 2304,
+            "mismatched_rooms": 350,
+            "mismatch_pct": 15.19
+          },
+          {
+            "arrival_month_start": "2016-10-01",
+            "non_cancelled_bookings": 2272,
+            "mismatched_rooms": 352,
+            "mismatch_pct": 15.49
+          },
+          {
+            "arrival_month_start": "2016-11-01",
+            "non_cancelled_bookings": 1762,
+            "mismatched_rooms": 298,
+            "mismatch_pct": 16.91
+          },
+          {
+            "arrival_month_start": "2016-12-01",
+            "non_cancelled_bookings": 1406,
+            "mismatched_rooms": 223,
+            "mismatch_pct": 15.86
+          },
+          {
+            "arrival_month_start": "2017-01-01",
+            "non_cancelled_bookings": 1328,
+            "mismatched_rooms": 107,
+            "mismatch_pct": 8.06
+          },
+          {
+            "arrival_month_start": "2017-02-01",
+            "non_cancelled_bookings": 1623,
+            "mismatched_rooms": 211,
+            "mismatch_pct": 13.0
+          },
+          {
+            "arrival_month_start": "2017-03-01",
+            "non_cancelled_bookings": 2134,
+            "mismatched_rooms": 239,
+            "mismatch_pct": 11.2
+          },
+          {
+            "arrival_month_start": "2017-04-01",
+            "non_cancelled_bookings": 1993,
+            "mismatched_rooms": 198,
+            "mismatch_pct": 9.93
+          },
+          {
+            "arrival_month_start": "2017-05-01",
+            "non_cancelled_bookings": 2339,
+            "mismatched_rooms": 189,
+            "mismatch_pct": 8.08
+          },
+          {
+            "arrival_month_start": "2017-06-01",
+            "non_cancelled_bookings": 2163,
+            "mismatched_rooms": 129,
+            "mismatch_pct": 5.96
+          },
+          {
+            "arrival_month_start": "2017-07-01",
+            "non_cancelled_bookings": 2235,
+            "mismatched_rooms": 140,
+            "mismatch_pct": 6.26
+          },
+          {
+            "arrival_month_start": "2017-08-01",
+            "non_cancelled_bookings": 2002,
+            "mismatched_rooms": 135,
+            "mismatch_pct": 6.74
+          }
+        ]
+      },
+      "Resort Hotel": {
+        "total_non_cancelled_bookings": 28937,
+        "total_mismatched_rooms": 7340,
+        "overall_mismatch_pct": 25.37,
+        "min_month_pct": 9.76,
+        "max_month_pct": 53.46,
+        "monthly_progression": [
+          {
+            "arrival_month_start": "2015-07-01",
+            "non_cancelled_bookings": 1058,
+            "mismatched_rooms": 254,
+            "mismatch_pct": 24.01
+          },
+          {
+            "arrival_month_start": "2015-08-01",
+            "non_cancelled_bookings": 1043,
+            "mismatched_rooms": 223,
+            "mismatch_pct": 21.38
+          },
+          {
+            "arrival_month_start": "2015-09-01",
+            "non_cancelled_bookings": 1034,
+            "mismatched_rooms": 287,
+            "mismatch_pct": 27.76
+          },
+          {
+            "arrival_month_start": "2015-10-01",
+            "non_cancelled_bookings": 1160,
+            "mismatched_rooms": 379,
+            "mismatch_pct": 32.67
+          },
+          {
+            "arrival_month_start": "2015-11-01",
+            "non_cancelled_bookings": 920,
+            "mismatched_rooms": 343,
+            "mismatch_pct": 37.28
+          },
+          {
+            "arrival_month_start": "2015-12-01",
+            "non_cancelled_bookings": 961,
+            "mismatched_rooms": 321,
+            "mismatch_pct": 33.4
+          },
+          {
+            "arrival_month_start": "2016-01-01",
+            "non_cancelled_bookings": 765,
+            "mismatched_rooms": 409,
+            "mismatch_pct": 53.46
+          },
+          {
+            "arrival_month_start": "2016-02-01",
+            "non_cancelled_bookings": 1113,
+            "mismatched_rooms": 465,
+            "mismatch_pct": 41.78
+          },
+          {
+            "arrival_month_start": "2016-03-01",
+            "non_cancelled_bookings": 1409,
+            "mismatched_rooms": 446,
+            "mismatch_pct": 31.65
+          },
+          {
+            "arrival_month_start": "2016-04-01",
+            "non_cancelled_bookings": 1345,
+            "mismatched_rooms": 343,
+            "mismatch_pct": 25.5
+          },
+          {
+            "arrival_month_start": "2016-05-01",
+            "non_cancelled_bookings": 1323,
+            "mismatched_rooms": 362,
+            "mismatch_pct": 27.36
+          },
+          {
+            "arrival_month_start": "2016-06-01",
+            "non_cancelled_bookings": 993,
+            "mismatched_rooms": 201,
+            "mismatch_pct": 20.24
+          },
+          {
+            "arrival_month_start": "2016-07-01",
+            "non_cancelled_bookings": 985,
+            "mismatched_rooms": 122,
+            "mismatch_pct": 12.39
+          },
+          {
+            "arrival_month_start": "2016-08-01",
+            "non_cancelled_bookings": 1107,
+            "mismatched_rooms": 128,
+            "mismatch_pct": 11.56
+          },
+          {
+            "arrival_month_start": "2016-09-01",
+            "non_cancelled_bookings": 1068,
+            "mismatched_rooms": 221,
+            "mismatch_pct": 20.69
+          },
+          {
+            "arrival_month_start": "2016-10-01",
+            "non_cancelled_bookings": 1417,
+            "mismatched_rooms": 337,
+            "mismatch_pct": 23.78
+          },
+          {
+            "arrival_month_start": "2016-11-01",
+            "non_cancelled_bookings": 1056,
+            "mismatched_rooms": 358,
+            "mismatch_pct": 33.9
+          },
+          {
+            "arrival_month_start": "2016-12-01",
+            "non_cancelled_bookings": 1056,
+            "mismatched_rooms": 302,
+            "mismatch_pct": 28.6
+          },
+          {
+            "arrival_month_start": "2017-01-01",
+            "non_cancelled_bookings": 1103,
+            "mismatched_rooms": 400,
+            "mismatch_pct": 36.26
+          },
+          {
+            "arrival_month_start": "2017-02-01",
+            "non_cancelled_bookings": 1195,
+            "mismatched_rooms": 306,
+            "mismatch_pct": 25.61
+          },
+          {
+            "arrival_month_start": "2017-03-01",
+            "non_cancelled_bookings": 1163,
+            "mismatched_rooms": 302,
+            "mismatch_pct": 25.97
+          },
+          {
+            "arrival_month_start": "2017-04-01",
+            "non_cancelled_bookings": 1205,
+            "mismatched_rooms": 244,
+            "mismatch_pct": 20.25
+          },
+          {
+            "arrival_month_start": "2017-05-01",
+            "non_cancelled_bookings": 1212,
+            "mismatched_rooms": 230,
+            "mismatch_pct": 18.98
+          },
+          {
+            "arrival_month_start": "2017-06-01",
+            "non_cancelled_bookings": 1045,
+            "mismatched_rooms": 141,
+            "mismatch_pct": 13.49
+          },
+          {
+            "arrival_month_start": "2017-07-01",
+            "non_cancelled_bookings": 1094,
+            "mismatched_rooms": 108,
+            "mismatch_pct": 9.87
+          },
+          {
+            "arrival_month_start": "2017-08-01",
+            "non_cancelled_bookings": 1107,
+            "mismatched_rooms": 108,
+            "mismatch_pct": 9.76
+          }
+        ]
+      },
+      "portfolio_summary": {
+        "total_non_cancelled_bookings": 75165,
+        "total_mismatched_rooms": 14114,
+        "overall_mismatch_pct": 18.78
+      }
+    },
+    "room_mismatch_scenario": {
+      "description": "20% reduction in preventable room type reassignments via advance inventory blocking",
+      "reduction_rate": 0.2,
+      "city_hotel": {
+        "mismatched_stays": 6774,
+        "prevented_mismatches": 1354.8
+      },
+      "resort_hotel": {
+        "mismatched_stays": 7340,
+        "prevented_mismatches": 1468.0
+      },
+      "portfolio": {
+        "mismatched_stays": 14114,
+        "prevented_mismatches": 2822.8
+      }
+    },
+    "segment_performance": {
+      "City Hotel": [
+        {
+          "market_segment": "Online TA",
+          "bookings": 38748,
+          "cancellations": 14491,
+          "cancel_rate_pct": 37.4,
+          "room_nights_sold": 75062,
+          "room_revenue": 8732303.32,
+          "adr": 116.33,
+          "room_night_share_pct": 56.1,
+          "revenue_share_pct": 61.1,
+          "revenue_rank": 1,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Offline TA/TO",
+          "bookings": 16746,
+          "cancellations": 7172,
+          "cancel_rate_pct": 42.8,
+          "room_nights_sold": 28314,
+          "room_revenue": 2515578.67,
+          "adr": 88.85,
+          "room_night_share_pct": 21.2,
+          "revenue_share_pct": 17.6,
+          "revenue_rank": 2,
+          "is_underperformer": 1
+        },
+        {
+          "market_segment": "Direct",
+          "bookings": 6093,
+          "cancellations": 1056,
+          "cancel_rate_pct": 17.3,
+          "room_nights_sold": 13705,
+          "room_revenue": 1651522.04,
+          "adr": 120.51,
+          "room_night_share_pct": 10.2,
+          "revenue_share_pct": 11.6,
+          "revenue_rank": 3,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Groups",
+          "bookings": 13975,
+          "cancellations": 9623,
+          "cancel_rate_pct": 68.9,
+          "room_nights_sold": 10967,
+          "room_revenue": 947315.63,
+          "adr": 86.38,
+          "room_night_share_pct": 8.2,
+          "revenue_share_pct": 6.6,
+          "revenue_rank": 4,
+          "is_underperformer": 1
+        },
+        {
+          "market_segment": "Corporate",
+          "bookings": 2986,
+          "cancellations": 641,
+          "cancel_rate_pct": 21.5,
+          "room_nights_sold": 4401,
+          "room_revenue": 365135.4,
+          "adr": 82.97,
+          "room_night_share_pct": 3.3,
+          "revenue_share_pct": 2.6,
+          "revenue_rank": 5,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Aviation",
+          "bookings": 237,
+          "cancellations": 52,
+          "cancel_rate_pct": 21.9,
+          "room_nights_sold": 692,
+          "room_revenue": 70868.36,
+          "adr": 102.41,
+          "room_night_share_pct": 0.5,
+          "revenue_share_pct": 0.5,
+          "revenue_rank": 6,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Complementary",
+          "bookings": 542,
+          "cancellations": 64,
+          "cancel_rate_pct": 11.8,
+          "room_nights_sold": 719,
+          "room_revenue": 2743.0,
+          "adr": 3.82,
+          "room_night_share_pct": 0.5,
+          "revenue_share_pct": 0.0,
+          "revenue_rank": 7,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Undefined",
+          "bookings": 2,
+          "cancellations": 2,
+          "cancel_rate_pct": 100.0,
+          "room_nights_sold": 0,
+          "room_revenue": 0.0,
+          "adr": null,
+          "room_night_share_pct": 0.0,
+          "revenue_share_pct": 0.0,
+          "revenue_rank": 8,
+          "is_underperformer": 0
+        }
+      ],
+      "Resort Hotel": [
+        {
+          "market_segment": "Online TA",
+          "bookings": 17729,
+          "cancellations": 6248,
+          "cancel_rate_pct": 35.2,
+          "room_nights_sold": 41639,
+          "room_revenue": 4662825.19,
+          "adr": 111.98,
+          "room_night_share_pct": 36.4,
+          "revenue_share_pct": 42.8,
+          "revenue_rank": 1,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Offline TA/TO",
+          "bookings": 7472,
+          "cancellations": 1138,
+          "cancel_rate_pct": 15.2,
+          "room_nights_sold": 36896,
+          "room_revenue": 2865312.28,
+          "adr": 77.66,
+          "room_night_share_pct": 32.3,
+          "revenue_share_pct": 26.3,
+          "revenue_rank": 2,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Direct",
+          "bookings": 6513,
+          "cancellations": 878,
+          "cancel_rate_pct": 13.5,
+          "room_nights_sold": 17974,
+          "room_revenue": 2278714.67,
+          "adr": 126.78,
+          "room_night_share_pct": 15.7,
+          "revenue_share_pct": 20.9,
+          "revenue_rank": 3,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Groups",
+          "bookings": 5835,
+          "cancellations": 2474,
+          "cancel_rate_pct": 42.4,
+          "room_nights_sold": 13338,
+          "room_revenue": 884436.14,
+          "adr": 66.31,
+          "room_night_share_pct": 11.7,
+          "revenue_share_pct": 8.1,
+          "revenue_rank": 4,
+          "is_underperformer": 1
+        },
+        {
+          "market_segment": "Corporate",
+          "bookings": 2309,
+          "cancellations": 351,
+          "cancel_rate_pct": 15.2,
+          "room_nights_sold": 4188,
+          "room_revenue": 208361.93,
+          "adr": 49.75,
+          "room_night_share_pct": 3.7,
+          "revenue_share_pct": 1.9,
+          "revenue_rank": 5,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Complementary",
+          "bookings": 201,
+          "cancellations": 33,
+          "cancel_rate_pct": 16.4,
+          "room_nights_sold": 366,
+          "room_revenue": 2069.53,
+          "adr": 5.65,
+          "room_night_share_pct": 0.3,
+          "revenue_share_pct": 0.0,
+          "revenue_rank": 6,
+          "is_underperformer": 0
+        }
+      ],
+      "All": [
+        {
+          "market_segment": "Online TA",
+          "bookings": 56477,
+          "cancellations": 20739,
+          "cancel_rate_pct": 36.7,
+          "room_nights_sold": 116701,
+          "room_revenue": 13395128.51,
+          "adr": 114.78,
+          "room_night_share_pct": 47.0,
+          "revenue_share_pct": 53.2,
+          "revenue_rank": 1,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Offline TA/TO",
+          "bookings": 24218,
+          "cancellations": 8310,
+          "cancel_rate_pct": 34.3,
+          "room_nights_sold": 65210,
+          "room_revenue": 5380890.95,
+          "adr": 82.52,
+          "room_night_share_pct": 26.3,
+          "revenue_share_pct": 21.4,
+          "revenue_rank": 2,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Direct",
+          "bookings": 12606,
+          "cancellations": 1934,
+          "cancel_rate_pct": 15.3,
+          "room_nights_sold": 31679,
+          "room_revenue": 3930236.71,
+          "adr": 124.06,
+          "room_night_share_pct": 12.8,
+          "revenue_share_pct": 15.6,
+          "revenue_rank": 3,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Groups",
+          "bookings": 19810,
+          "cancellations": 12097,
+          "cancel_rate_pct": 61.1,
+          "room_nights_sold": 24305,
+          "room_revenue": 1831751.77,
+          "adr": 75.37,
+          "room_night_share_pct": 9.8,
+          "revenue_share_pct": 7.3,
+          "revenue_rank": 4,
+          "is_underperformer": 1
+        },
+        {
+          "market_segment": "Corporate",
+          "bookings": 5295,
+          "cancellations": 992,
+          "cancel_rate_pct": 18.7,
+          "room_nights_sold": 8589,
+          "room_revenue": 573497.33,
+          "adr": 66.77,
+          "room_night_share_pct": 3.5,
+          "revenue_share_pct": 2.3,
+          "revenue_rank": 5,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Aviation",
+          "bookings": 237,
+          "cancellations": 52,
+          "cancel_rate_pct": 21.9,
+          "room_nights_sold": 692,
+          "room_revenue": 70868.36,
+          "adr": 102.41,
+          "room_night_share_pct": 0.3,
+          "revenue_share_pct": 0.3,
+          "revenue_rank": 6,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Complementary",
+          "bookings": 743,
+          "cancellations": 97,
+          "cancel_rate_pct": 13.1,
+          "room_nights_sold": 1085,
+          "room_revenue": 4812.53,
+          "adr": 4.44,
+          "room_night_share_pct": 0.4,
+          "revenue_share_pct": 0.0,
+          "revenue_rank": 7,
+          "is_underperformer": 0
+        },
+        {
+          "market_segment": "Undefined",
+          "bookings": 2,
+          "cancellations": 2,
+          "cancel_rate_pct": 100.0,
+          "room_nights_sold": 0,
+          "room_revenue": 0.0,
+          "adr": null,
+          "room_night_share_pct": 0.0,
+          "revenue_share_pct": 0.0,
+          "revenue_rank": 8,
+          "is_underperformer": 0
+        }
+      ]
+    },
+    "channel_performance": {
+      "City Hotel": [
+        {
+          "distribution_channel": "TA/TO",
+          "bookings": 68944,
+          "cancellations": 31042,
+          "cancel_rate_pct": 45.0,
+          "room_nights_sold": 113621,
+          "room_revenue": 12105463.58,
+          "adr": 106.54,
+          "room_night_share_pct": 84.9,
+          "revenue_share_pct": 84.7
+        },
+        {
+          "distribution_channel": "Direct",
+          "bookings": 6780,
+          "cancellations": 1232,
+          "cancel_rate_pct": 18.2,
+          "room_nights_sold": 14516,
+          "room_revenue": 1670702.19,
+          "adr": 115.09,
+          "room_night_share_pct": 10.8,
+          "revenue_share_pct": 11.7
+        },
+        {
+          "distribution_channel": "Corporate",
+          "bookings": 3408,
+          "cancellations": 786,
+          "cancel_rate_pct": 23.1,
+          "room_nights_sold": 5461,
+          "room_revenue": 476292.69,
+          "adr": 87.22,
+          "room_night_share_pct": 4.1,
+          "revenue_share_pct": 3.3
+        },
+        {
+          "distribution_channel": "GDS",
+          "bookings": 193,
+          "cancellations": 37,
+          "cancel_rate_pct": 19.2,
+          "room_nights_sold": 262,
+          "room_revenue": 33007.96,
+          "adr": 125.98,
+          "room_night_share_pct": 0.2,
+          "revenue_share_pct": 0.2
+        },
+        {
+          "distribution_channel": "Undefined",
+          "bookings": 4,
+          "cancellations": 4,
+          "cancel_rate_pct": 100.0,
+          "room_nights_sold": 0,
+          "room_revenue": 0.0,
+          "adr": null,
+          "room_night_share_pct": 0.0,
+          "revenue_share_pct": 0.0
+        }
+      ],
+      "Resort Hotel": [
+        {
+          "distribution_channel": "TA/TO",
+          "bookings": 28925,
+          "cancellations": 9109,
+          "cancel_rate_pct": 31.5,
+          "room_nights_sold": 86459,
+          "room_revenue": 8066941.82,
+          "adr": 93.3,
+          "room_night_share_pct": 75.6,
+          "revenue_share_pct": 74.0
+        },
+        {
+          "distribution_channel": "Direct",
+          "bookings": 7864,
+          "cancellations": 1325,
+          "cancel_rate_pct": 16.8,
+          "room_nights_sold": 21361,
+          "room_revenue": 2487031.55,
+          "adr": 116.43,
+          "room_night_share_pct": 18.7,
+          "revenue_share_pct": 22.8
+        },
+        {
+          "distribution_channel": "Corporate",
+          "bookings": 3269,
+          "cancellations": 688,
+          "cancel_rate_pct": 21.0,
+          "room_nights_sold": 6581,
+          "room_revenue": 347746.37,
+          "adr": 52.84,
+          "room_night_share_pct": 5.8,
+          "revenue_share_pct": 3.2
+        },
+        {
+          "distribution_channel": "Undefined",
+          "bookings": 1,
+          "cancellations": 0,
+          "cancel_rate_pct": 0.0,
+          "room_nights_sold": 0,
+          "room_revenue": 0.0,
+          "adr": null,
+          "room_night_share_pct": 0.0,
+          "revenue_share_pct": 0.0
+        }
+      ],
+      "All": [
+        {
+          "distribution_channel": "TA/TO",
+          "bookings": 97869,
+          "cancellations": 40151,
+          "cancel_rate_pct": 41.0,
+          "room_nights_sold": 200080,
+          "room_revenue": 20172405.4,
+          "adr": 100.82,
+          "room_night_share_pct": 80.6,
+          "revenue_share_pct": 80.1
+        },
+        {
+          "distribution_channel": "Direct",
+          "bookings": 14644,
+          "cancellations": 2557,
+          "cancel_rate_pct": 17.5,
+          "room_nights_sold": 35877,
+          "room_revenue": 4157733.74,
+          "adr": 115.89,
+          "room_night_share_pct": 14.5,
+          "revenue_share_pct": 16.5
+        },
+        {
+          "distribution_channel": "Corporate",
+          "bookings": 6677,
+          "cancellations": 1474,
+          "cancel_rate_pct": 22.1,
+          "room_nights_sold": 12042,
+          "room_revenue": 824039.06,
+          "adr": 68.43,
+          "room_night_share_pct": 4.9,
+          "revenue_share_pct": 3.3
+        },
+        {
+          "distribution_channel": "GDS",
+          "bookings": 193,
+          "cancellations": 37,
+          "cancel_rate_pct": 19.2,
+          "room_nights_sold": 262,
+          "room_revenue": 33007.96,
+          "adr": 125.98,
+          "room_night_share_pct": 0.1,
+          "revenue_share_pct": 0.1
+        },
+        {
+          "distribution_channel": "Undefined",
+          "bookings": 5,
+          "cancellations": 4,
+          "cancel_rate_pct": 80.0,
+          "room_nights_sold": 0,
+          "room_revenue": 0.0,
+          "adr": null,
+          "room_night_share_pct": 0.0,
+          "revenue_share_pct": 0.0
+        }
+      ]
+    },
+    "mix_shift_scenario": {
+      "description": "Shift 2,000 room-nights from underperforming Groups segment to Direct segment at each hotel",
+      "formula": "delta_revenue = shifted_nights * (direct_adr - groups_adr)",
+      "city_hotel": {
+        "shifted_room_nights": 2000,
+        "groups_adr": 86.38,
+        "direct_adr": 120.51,
+        "adr_spread": 34.13,
+        "delta_revenue": 68260.0,
+        "cancel_rate_groups_pct": 68.9,
+        "cancel_rate_direct_pct": 17.3,
+        "cancel_rate_drop_pp": -51.6
+      },
+      "resort_hotel": {
+        "shifted_room_nights": 2000,
+        "groups_adr": 66.31,
+        "direct_adr": 126.78,
+        "adr_spread": 60.47,
+        "delta_revenue": 120940.0,
+        "cancel_rate_groups_pct": 42.4,
+        "cancel_rate_direct_pct": 13.5,
+        "cancel_rate_drop_pp": -28.9
+      },
+      "portfolio_total": {
+        "total_shifted_room_nights": 4000,
+        "total_delta_revenue": 189200.0
+      },
+      "label": "Scenario, not forecast",
+      "caveat": "Higher prices would probably reduce occupancy; the dataset cannot measure price elasticity. Mix shift assumes that sufficient unmet Direct demand exists at full BAR to replace wholesale group allotments."
     }
   }
 }

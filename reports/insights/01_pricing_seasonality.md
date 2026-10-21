@@ -61,9 +61,9 @@ Every figure below is derived from analytical output marts saved on disk and ind
 
 #### Seasonal Performance Aggregates
 - **City Hotel Realized Totals**:
-  - Peak Season (Apr, May, Jun, Jul): **44,783** room nights sold, **53,950** room nights available (**83.01%** blended occupancy), **$5,431,885.55** room revenue, **$121.29** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
-  - Shoulder Season (Mar, Aug, Sep, Oct): **59,132** room nights sold, **76,050** room nights available (**77.75%** blended occupancy), **$6,230,214.85** room revenue, **$105.36** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
-  - Low Season (Nov, Dec, Jan, Feb): **29,945** room nights sold, **60,500** room nights available (**49.50%** blended occupancy), **$2,623,366.02** room revenue, **$87.61** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
+  - Peak Season (Apr, May, Jun, Jul): **50,636** room nights sold, **61,000** room nights available (**83.01%** blended occupancy), **$5,975,944.61** room revenue, **$118.02** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
+  - Shoulder Season (Mar, Aug, Sep, Oct): **53,279** room nights sold, **69,250** room nights available (**76.94%** blended occupancy), **$5,686,155.79** room revenue, **$106.72** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
+  - Low Season (Nov, Dec, Jan, Feb): **29,945** room nights sold, **60,250** room nights available (**49.70%** blended occupancy), **$2,623,366.02** room revenue, **$87.61** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
 - **Resort Hotel Realized Totals**:
   - Peak Season (Jun, Jul, Aug, Sep): **49,326** room nights sold, **57,750** room nights available (**85.41%** blended occupancy), **$6,756,682.18** room revenue, **$136.98** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
   - Shoulder Season (Mar, Apr, May, Oct): **39,870** room nights sold, **51,660** room nights available (**77.18%** blended occupancy), **$2,722,073.29** room revenue, **$68.27** blended ADR [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`].
@@ -86,7 +86,7 @@ Every figure below is derived from analytical output marts saved on disk and ind
 ### 3. Recommended Action
 1. **Automated Compression Pricing Hurdles (Peak Premium Rule)**:
    - **City Hotel**: Institute an automated dynamic rate tier that applies a **10% premium** above standard Best Available Rate (BAR) whenever projected on-the-books occupancy reaches or exceeds 90% of capacity (225 rooms). This rule targets the property's proven top 2.89% compression nights to harvest inelastic last-minute business and leisure demand.
-   - **Resort Hotel**: Because Resort Hotel never crosses 90% capacity due to inventory derivation buffers but operates at >= 85.7% capacity on 220 nights (28.87%), set dynamic compression triggers at **85.0% capacity** (179 rooms) throughout the June–September summer window.
+   - **Resort Hotel**: As Resort Hotel never crosses 90% capacity under inventory derivation buffers but operates at >= 85.7% capacity on 220 nights (28.87%), set dynamic compression triggers at **85.0% capacity** (179 rooms) throughout the June–September summer window.
 2. **Defensive Rate Floors in Low Months**:
    - Establish a hard rate floor of **$85.00** for City Hotel and **$55.00** for Resort Hotel during Low season months (November, December, January, February).
    - In Low months, prohibit flash-sale discounting below marginal cleaning and servicing costs. Instead of unbundling and discounting base room rates, stimulate off-peak demand using value-added packages (e.g., complimentary breakfast, parking, dining vouchers, and flexible cancellation terms).
@@ -122,15 +122,15 @@ Every figure below is derived from analytical output marts saved on disk and ind
 - **Formula**:
   $$\Delta \text{Revenue} = \text{Revenue}_{\text{Peak Season}} \times 0.05$$
 - **Data Inputs** [`v_monthly_kpis.csv`, room_revenue; `reports/findings_data.json`]:
-  - Total historical Peak season revenue (April, May, June, July): **$5,431,885.55**
-  - Total Peak season room nights sold: **44,783 nights**
-  - Baseline blended Peak season ADR: **$121.29**
+  - Total historical Peak season revenue (April, May, June, July): **$5,975,944.61**
+  - Total Peak season room nights sold: **50,636 nights**
+  - Baseline blended Peak season ADR: **$118.02**
 - **Calculation**:
-  $$\Delta \text{Revenue} = \$5,431,885.55 \times 0.05 = \$271,594.28$$
-  $$\text{New Revenue} = \$5,431,885.55 + \$271,594.28 = \$5,703,479.83$$
-  $$\text{New Blended ADR} = \frac{\$5,703,479.83}{44,783} = \$127.36 \quad (+\$6.07/\text{night})$$
+  $$\Delta \text{Revenue} = \$5,975,944.61 \times 0.05 = \mathbf{\$298,797.23}$$
+  $$\text{New Revenue} = \$5,975,944.61 + \$298,797.23 = \mathbf{\$6,274,741.84}$$
+  $$\text{New Blended ADR} = \frac{\$6,274,741.84}{50,636} = \mathbf{\$123.92} \quad (+\$5.90/\text{night})$$
 - **Scenario Result**:
-  If ADR across all four Peak season months rose by 5% with occupancy unchanged, City Hotel room revenue would rise by **$271,594.28**.
+  If ADR across all four Peak season months rose by 5% with occupancy unchanged, City Hotel room revenue would rise by **$298,797.23**.
 
 ---
 
@@ -142,7 +142,7 @@ Cross-tabulating monthly occupancy and realized ADR against each property's wind
 1. **Group 1 (Underpriced Peak Demand: Occupancy > 85.0% but ADR < Hotel Window Average)**:
    - Across the entire portfolio, this pricing distortion occurs exclusively at **Resort Hotel** in exactly **2 calendar months**: **September 2015** (86.32% occupancy, $88.85 ADR) and **June 2016** (85.32% occupancy, $91.63 ADR) [`v_monthly_kpis.csv`]. In both months, occupancy exceeded the 85% threshold, yet ADR sat well below the hotel's window benchmark of **$95.29** [`v_hotel_totals.csv`, adr].
    - **City Hotel** experienced **0 months** fitting this profile [`reports/findings_data.json`, price_occupancy_gaps.group1_high_occ_low_adr.City Hotel]. Whenever City Hotel occupancy exceeded 85% (six distinct months: 2016-07, 2016-08, 2016-09, 2017-04, 2017-07, 2017-08), ADR ranged from **$112.73 to $134.52**, consistently outpacing its window benchmark of **$106.72** [`v_monthly_kpis.csv`].
-   - *Underlying Cause for Group 1*: At Resort Hotel, June and September represent high-demand leisure shoulder-to-peak transitions. In September 2015 and June 2016, management accepted heavy wholesale tour-operator and discounted group blocks early in the booking curve, filling over 85% of rooms at off-peak rates and denying inventory to high-yield direct transient travelers.
+   - *Operational Context for Group 1*: At Resort Hotel, June and September represent high-demand leisure shoulder-to-peak transitions. In September 2015 and June 2016, management accepted heavy wholesale tour-operator and discounted group blocks early in the booking curve, filling over 85% of rooms at off-peak rates and denying inventory to high-yield direct transient travelers.
 
 2. **Group 2 (Off-Peak Depression: Occupancy < Hotel Window Average AND ADR < Hotel Window Average)**:
    - This dual-drag underperformance affects **17 hotel-months** across the portfolio (**8 months** at City Hotel and **9 months** at Resort Hotel) [`reports/findings_data.json`, price_occupancy_gaps.group2_low_occ_low_adr].
@@ -300,7 +300,7 @@ Cross-tabulating monthly occupancy and realized ADR against each property's wind
 | Scenario ID | Focus Area | Property | Target Cohort | Baseline Revenue ($) | Scenario Mechanism | Realized Impact ($) | Key Operational Caveat | Source Tag |
 | :--- | :--- | :--- | :--- | :---: | :--- | :---: | :--- | :--- |
 | **Scenario A1** | Seasonality Peak Pricing | City Hotel | 22 nights $\ge 90\%$ capacity | $580,233.65 | +10% rate premium on compression dates | **+$58,023.37** | Scenario, not forecast; higher rates may reduce occupancy | `[reports/findings_data.json, pricing_rules_and_scenarios]` |
-| **Scenario A2** | Seasonality Peak Pricing | City Hotel | 4 Peak season months (Apr–Jul) | $5,431,885.55 | +5% rate premium across peak calendar months | **+$271,594.28** | Scenario, not forecast; price elasticity unknown | `[reports/findings_data.json, pricing_rules_and_scenarios]` |
+| **Scenario A2** | Seasonality Peak Pricing | City Hotel | 4 Peak season months (Apr–Jul) | $5,975,944.61 | +5% rate premium across peak calendar months | **+$298,797.23** | Scenario, not forecast; price elasticity unknown | `[reports/findings_data.json, pricing_rules_and_scenarios]` |
 | **Scenario B1** | Price & Occupancy Gaps | Resort Hotel | 2 Group 1 months (2015-09, 2016-06) | $975,708.65 | +5% ADR increase on unconstrained peak volume | **+$48,785.43** | Scenario, not forecast; price elasticity unknown | `[reports/findings_data.json, price_occupancy_gaps]` |
 | **Scenario B2** | Price & Occupancy Gaps | Resort Hotel | 2 Group 1 months (2015-09, 2016-06) | $975,708.65 | Close gap to property window ADR ($95.29) | **+$54,662.12** | Scenario, not forecast; relies on curtailing wholesale blocks | `[reports/findings_data.json, price_occupancy_gaps]` |
 | **Scenario B3** | Price & Occupancy Gaps | Portfolio | 17 Group 2 off-peak winter months | $4,056,130.55 | +5.0 pp occupancy stimulation at stable ADR | **+$418,478.86** | Scenario, not forecast; ignores marginal servicing costs | `[reports/findings_data.json, price_occupancy_gaps]` |

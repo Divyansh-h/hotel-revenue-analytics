@@ -65,7 +65,7 @@ Every figure below is sourced directly from physical CSV files on disk and index
    - Sample Scope: Full clean analytical dataset ($N = 119,388$; 44,223 canceled, 75,165 non-canceled)
    - Test Statistic: $U = 2,291,139,948$, $p$-value: $< 1 \times 10^{-300}$ [`reports/tables/stat_tests_summary.csv`, test_id = 'T4']
    - Effect Size: Rank-biserial correlation $r_{\text{rb}} = 0.3785$; Median canceled lead time = **113.0 days** vs non-canceled = **45.0 days** (median shift of **+68.0 days**) [`reports/tables/stat_tests_summary.csv`, test_id = 'T4']
-   - Methodological note: Independent samples $t$-test is invalidated due to severe positive skewness of lead time distributions.
+   - Methodological note: Independent samples $t$-test is invalidated in the presence of severe positive skewness of lead time distributions.
 3. **Test T6.3 (Robustness Check on Deduplicated Data)**:
    - Sample Scope: Non-duplicate reservations ($N = 87,394$, excluding 31,994 flagged duplicates)
    - Test Statistic: $\chi^2 = 5,005.16$, $df = 4$, $p$-value: $< 1 \times 10^{-300}$, Cramer's $V = 0.2393$ [`reports/tables/stat_tests_summary.csv`, test_id = 'T6.3']
@@ -226,7 +226,7 @@ An analysis of cancellation timing relative to scheduled guest arrival reveals s
    - Across the entire dataset (including 1,208 no-shows with null status intervals), these **5,135 late cancellations** represent **11.61%** of all canceled reservations [`v_late_cancel_revenue_at_risk.csv`].
 
 2. **Perishable Inventory Spoilage**:
-   - Because these reservations are dropped within 7 days of scheduled arrival, the hotel's revenue management team has virtually no advance window to remarket, discount, or resell the vacated room nights, directly depressing realized occupancy and RevPAR.
+   - As these reservations are dropped within 7 days of scheduled arrival, the hotel's revenue management team has virtually no advance window to remarket, discount, or resell the vacated room nights, directly depressing realized occupancy and RevPAR.
 
 3. **Upper-Bound Revenue at Risk**:
    - Across all 26 arrival months, late cancellations within 7 days placed an aggregate of **$1,533,486.66** in upper-bound room revenue at risk [`v_late_cancel_revenue_at_risk.csv`, late_cancel_revenue_at_risk].
@@ -256,8 +256,8 @@ An analysis of cancellation timing relative to scheduled guest arrival reveals s
 #### Late Cancellation Revenue at Risk Summary (`v_late_cancel_revenue_at_risk.csv`)
 | Entity Scope | Total Bookings | Total Cancellations | Late Cancellations ($\le 7$d) | Late Room Nights | Revenue at Risk Upper Bound ($) | Total Potential Revenue ($) | Pct Revenue at Risk | Source Tag |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **City Hotel** | 79,330 | 33,102 | **3,870** | 10,864 | **$1,167,162.59** | $25,296,878.07 | 4.61% | `[v_late_cancel_revenue_at_risk.csv, late_cancel_revenue_at_risk]` |
-| **Resort Hotel** | 40,058 | 11,121 | **1,265** | 3,977 | **$366,324.07** | $17,421,283.26 | 2.10% | `[v_late_cancel_revenue_at_risk.csv, late_cancel_revenue_at_risk]` |
+| **City Hotel** | 79,330 | 33,102 | **3,870** | 10,864 | **$1,167,162.59** | $25,274,069.96 | 4.62% | `[v_late_cancel_revenue_at_risk.csv, late_cancel_revenue_at_risk]` |
+| **Resort Hotel** | 40,058 | 11,121 | **1,265** | 3,977 | **$366,324.07** | $17,444,091.37 | 2.10% | `[v_late_cancel_revenue_at_risk.csv, late_cancel_revenue_at_risk]` |
 | **All Hotels** | **119,388** | **44,223** | **5,135** | **14,841** | **$1,533,486.66** | **$42,718,161.33** | **3.59%** | `[v_late_cancel_revenue_at_risk.csv, late_cancel_revenue_at_risk]` |
 
 ---
